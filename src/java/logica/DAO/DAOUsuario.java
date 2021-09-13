@@ -30,7 +30,7 @@ public class DAOUsuario extends Conexion{
             pst.setString(2, user.getPassword());
             rs = pst.executeQuery();
             if (rs.next()) {
-                return DibujarUsuario(rs.getString("Email"),rs.getString("Nombre"),rs.getString("Apellidos"),rs.getString("FecNacimineto"),rs.getInt("Tipo_usuario"),rs.getString("Password"));
+                return DibujarUsuario(rs.getString("Email"),rs.getString("Nombre"),rs.getString("Apellidos"),rs.getString("FecNacimiento"),rs.getInt("Tipo_usuario"),rs.getString("Password"));
 
             }
         } catch (SQLException e) {

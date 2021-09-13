@@ -18,9 +18,9 @@ public class Conexion {
     private String PASSWORD="root";
     private String HOST="localhost";
     private String PORT="3306";
-    private String DATABASE="cr_trips";
+    private String DATABASE="CR_TRIPS";
     private String CLASSNAME="com.mysql.cj.jdbc.Driver";
-    private String URL="jdbc:mysql://"+HOST+":"+PORT+"/"+DATABASE;
+    private String URL="jdbc:mysql://"+HOST+":"+PORT+"/"+DATABASE+"?useSSL=false";
     private Connection con;
     
     public Conexion() {
