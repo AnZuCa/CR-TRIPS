@@ -7,10 +7,27 @@ and open the template in the editor..
 <html>
     <head>
         <title>TODO supply a title</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div>Hola lala jj</div>
     </body>
+    
+    <script>
+        a();
+    function a(){
+        use={
+                    email: "aaaaa"
+                    
+                    
+                }
+
+                 $.ajax({type: "POST", url:"http://localhost:8080/CR-TRIPS/webresources/Usuario/Login",data: JSON.stringify(use),contentType: "application/json"})
+                .then( ()=>{ },(error)=>{ });
+                
+        
+    }    
+    </script>
 </html>

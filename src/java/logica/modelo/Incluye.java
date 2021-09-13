@@ -6,7 +6,7 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -42,13 +44,16 @@ public class Incluye implements Serializable {
     @Basic(optional = false)
     @Column(name = "Codigo")
     private Integer codigo;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
     @JoinTable(name = "incluye_tour", joinColumns = {
-        @JoinColumn(name = "Incluye_Codigo", referencedColumnName = "Codigo")}, inverseJoinColumns = {
-        @JoinColumn(name = "Tour_reserva", referencedColumnName = "Codigo")})
+        @JoinColumn(name = "Incluye", referencedColumnName = "Codigo")}, inverseJoinColumns = {
+        @JoinColumn(name = "Tour", referencedColumnName = "Codigo")})
     @ManyToMany
-    private Collection<TourReserva> tourReservaCollection;
+    private List<Tour> tourList;
     @JoinColumn(name = "Empresa", referencedColumnName = "Email")
     @ManyToOne(optional = false)
     private Usuario empresa;
@@ -58,6 +63,11 @@ public class Incluye implements Serializable {
 
     public Incluye(Integer codigo) {
         this.codigo = codigo;
+    }
+
+    public Incluye(Integer codigo, String descripcion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
     }
 
     public Integer getCodigo() {
@@ -77,12 +87,20 @@ public class Incluye implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TourReserva> getTourReservaCollection() {
-        return tourReservaCollection;
+    public List<Tour> getTourList() {
+        return tourList;
     }
 
-    public void setTourReservaCollection(Collection<TourReserva> tourReservaCollection) {
-        this.tourReservaCollection = tourReservaCollection;
+    public void setTourList(List<Tour> tourList) {
+        this.tourList = tourList;
+    }
+
+    public Usuario getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Usuario empresa) {
+        this.empresa = empresa;
     }
 
     @Override
@@ -107,7 +125,7 @@ public class Incluye implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Incluye[ codigo=" + codigo + " ]";
+        return "logica.modelo.Incluye[ codigo=" + codigo + " ]";
     }
     
 }

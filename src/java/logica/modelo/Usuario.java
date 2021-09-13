@@ -6,7 +6,7 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -38,41 +40,57 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Email")
     private String email;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "Nombre")
     private String nombre;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 40)
     @Column(name = "Apellidos")
     private String apellidos;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "FecNacimiento")
     private String fecNacimiento;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Tipo_usuario")
     private int tipousuario;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Password")
     private String password;
-    @ManyToMany(mappedBy = "usuarioCollection")
-    private Collection<Tour> tourCollection;
+    @ManyToMany(mappedBy = "usuarioList")
+    private List<Tour> tourList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Comentario> comentarioCollection;
+    private List<Comentario> comentarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
-    private Collection<Tour> tourCollection1;
+    private List<Tour> tourList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Pregunta> preguntaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Reserva> reservaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Tarjeta> tarjetaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Telefono> telefonoCollection;
+    private List<Pregunta> preguntaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
-    private Collection<TipoTicket> tipoTicketCollection;
+    private List<Recomendacion> recomendacionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
+    private List<Incluye> incluyeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Reserva> reservaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Tarjeta> tarjetaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Telefono> telefonoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
+    private List<TipoTicket> tipoTicketList;
 
     public Usuario() {
     }
@@ -139,75 +157,93 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Tour> getTourCollection() {
-        return tourCollection;
+    public List<Tour> getTourList() {
+        return tourList;
     }
 
-    public void setTourCollection(Collection<Tour> tourCollection) {
-        this.tourCollection = tourCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comentario> getComentarioCollection() {
-        return comentarioCollection;
-    }
-
-    public void setComentarioCollection(Collection<Comentario> comentarioCollection) {
-        this.comentarioCollection = comentarioCollection;
+    public void setTourList(List<Tour> tourList) {
+        this.tourList = tourList;
     }
 
     @XmlTransient
-    public Collection<Tour> getTourCollection1() {
-        return tourCollection1;
+    public List<Comentario> getComentarioList() {
+        return comentarioList;
     }
 
-    public void setTourCollection1(Collection<Tour> tourCollection1) {
-        this.tourCollection1 = tourCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Pregunta> getPreguntaCollection() {
-        return preguntaCollection;
-    }
-
-    public void setPreguntaCollection(Collection<Pregunta> preguntaCollection) {
-        this.preguntaCollection = preguntaCollection;
+    public void setComentarioList(List<Comentario> comentarioList) {
+        this.comentarioList = comentarioList;
     }
 
     @XmlTransient
-    public Collection<Reserva> getReservaCollection() {
-        return reservaCollection;
+    public List<Tour> getTourList1() {
+        return tourList1;
     }
 
-    public void setReservaCollection(Collection<Reserva> reservaCollection) {
-        this.reservaCollection = reservaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Tarjeta> getTarjetaCollection() {
-        return tarjetaCollection;
-    }
-
-    public void setTarjetaCollection(Collection<Tarjeta> tarjetaCollection) {
-        this.tarjetaCollection = tarjetaCollection;
+    public void setTourList1(List<Tour> tourList1) {
+        this.tourList1 = tourList1;
     }
 
     @XmlTransient
-    public Collection<Telefono> getTelefonoCollection() {
-        return telefonoCollection;
+    public List<Pregunta> getPreguntaList() {
+        return preguntaList;
     }
 
-    public void setTelefonoCollection(Collection<Telefono> telefonoCollection) {
-        this.telefonoCollection = telefonoCollection;
+    public void setPreguntaList(List<Pregunta> preguntaList) {
+        this.preguntaList = preguntaList;
     }
 
     @XmlTransient
-    public Collection<TipoTicket> getTipoTicketCollection() {
-        return tipoTicketCollection;
+    public List<Recomendacion> getRecomendacionList() {
+        return recomendacionList;
     }
 
-    public void setTipoTicketCollection(Collection<TipoTicket> tipoTicketCollection) {
-        this.tipoTicketCollection = tipoTicketCollection;
+    public void setRecomendacionList(List<Recomendacion> recomendacionList) {
+        this.recomendacionList = recomendacionList;
+    }
+
+    @XmlTransient
+    public List<Incluye> getIncluyeList() {
+        return incluyeList;
+    }
+
+    public void setIncluyeList(List<Incluye> incluyeList) {
+        this.incluyeList = incluyeList;
+    }
+
+    @XmlTransient
+    public List<Reserva> getReservaList() {
+        return reservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
+    }
+
+    @XmlTransient
+    public List<Tarjeta> getTarjetaList() {
+        return tarjetaList;
+    }
+
+    public void setTarjetaList(List<Tarjeta> tarjetaList) {
+        this.tarjetaList = tarjetaList;
+    }
+
+    @XmlTransient
+    public List<Telefono> getTelefonoList() {
+        return telefonoList;
+    }
+
+    public void setTelefonoList(List<Telefono> telefonoList) {
+        this.telefonoList = telefonoList;
+    }
+
+    @XmlTransient
+    public List<TipoTicket> getTipoTicketList() {
+        return tipoTicketList;
+    }
+
+    public void setTipoTicketList(List<TipoTicket> tipoTicketList) {
+        this.tipoTicketList = tipoTicketList;
     }
 
     @Override
@@ -232,7 +268,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Usuario[ email=" + email + " ]";
+        return "logica.modelo.Usuario[ email=" + email + " ]";
     }
     
 }

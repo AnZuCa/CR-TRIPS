@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import logica.modelo.Conexion;
 import logica.modelo.Recomendacion;
+import logica.modelo.Usuario;
 
 /**
  *
@@ -59,6 +60,28 @@ public class DAORecomendacion extends Conexion {
             System.err.println("Error" + e);
         }
         return null;
+    }
+    public boolean RegistrarRecomendacion(Recomendacion recomendacion,Usuario usuario)
+    {
+        
+        List<Recomendacion> recomendaciones =  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("insert into cr_trips.Recomendacion(Descripcion, Empresa) values(?,?) ");
+            pst.clearParameters();
+            pst.setString(1, recomendacion.getDescripcion());
+            pst.setString(2, usuario.getEmail());
+            if (pst.executeUpdate() != 1) {
+                return false;
+
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return false;
     }
     public Recomendacion DibujarRecomendacion(Integer codigo, String descripcion)
     {   

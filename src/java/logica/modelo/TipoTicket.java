@@ -6,7 +6,7 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -43,10 +45,12 @@ public class TipoTicket implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoTicket1")
-    private Collection<TicketTour> ticketTourCollection;
+    private List<TicketTour> ticketTourList;
     @JoinColumn(name = "Empresa", referencedColumnName = "Email")
     @ManyToOne(optional = false)
     private Usuario empresa;
@@ -80,12 +84,12 @@ public class TipoTicket implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TicketTour> getTicketTourCollection() {
-        return ticketTourCollection;
+    public List<TicketTour> getTicketTourList() {
+        return ticketTourList;
     }
 
-    public void setTicketTourCollection(Collection<TicketTour> ticketTourCollection) {
-        this.ticketTourCollection = ticketTourCollection;
+    public void setTicketTourList(List<TicketTour> ticketTourList) {
+        this.ticketTourList = ticketTourList;
     }
 
     public Usuario getEmpresa() {
@@ -118,7 +122,7 @@ public class TipoTicket implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.TipoTicket[ codigo=" + codigo + " ]";
+        return "logica.modelo.TipoTicket[ codigo=" + codigo + " ]";
     }
     
 }

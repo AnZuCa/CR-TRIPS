@@ -13,6 +13,7 @@ import logica.DAO.*;
 public class Model {
     private  DAOCategoria daocategoria = new DAOCategoria();
     private  DAORecomendacion daorecomendacion = new DAORecomendacion();
+    private  DAOUsuario daousuario = new DAOUsuario();
     private static Model uniqueInstance;
     public static Model instance(){
         if (uniqueInstance == null){
@@ -33,8 +34,16 @@ public class Model {
     {
         return daorecomendacion.ObtenerRecomendacionesPorTour(codigotour);
     }
+    public boolean RegistrarRecomendacion(Recomendacion recomendacion, Usuario user)
+    {
+        return daorecomendacion.RegistrarRecomendacion(recomendacion, user);
+    }
     public List<Recomendacion> ObtenerRecomendacionesPorEmpresa(String emailempresa)
     {
         return daorecomendacion.ObtenerRecomendacionesPorEmpresa(emailempresa);
+    }
+    public Usuario Login(Usuario user)
+    {
+        return daousuario.ObtenerUsuario(user);
     }
 }

@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -39,6 +40,7 @@ public class Telefono implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Numero")
     private int numero;
     @JoinColumn(name = "Usuario", referencedColumnName = "Email")
@@ -103,7 +105,7 @@ public class Telefono implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Telefono[ codigo=" + codigo + " ]";
+        return "logica.modelo.Telefono[ codigo=" + codigo + " ]";
     }
     
 }

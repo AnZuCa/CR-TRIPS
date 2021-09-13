@@ -6,7 +6,7 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -42,31 +44,17 @@ public class Recomendacion implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "Descripcion")
     private String descripcion;
-    @ManyToMany(mappedBy = "recomendacionCollection")
-    private Collection<TourReserva> tourReservaCollection;
+    @ManyToMany(mappedBy = "recomendacionList")
+    private List<Tour> tourList;
     @JoinColumn(name = "Empresa", referencedColumnName = "Email")
     @ManyToOne(optional = false)
     private Usuario empresa;
 
     public Recomendacion() {
-    }
-
-    public Usuario getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Usuario empresa) {
-        this.empresa = empresa;
-    }
-
-    public Usuario getempresa() {
-        return empresa;
-    }
-
-    public void setempresa(Usuario empresa) {
-        this.empresa = empresa;
     }
 
     public Recomendacion(Integer codigo) {
@@ -76,13 +64,6 @@ public class Recomendacion implements Serializable {
     public Recomendacion(Integer codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-    }
-
-    public Recomendacion(Integer codigo, String descripcion, Collection<TourReserva> tourReservaCollection, Usuario usuario) {
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-        this.tourReservaCollection = tourReservaCollection;
-        this.empresa = usuario;
     }
 
     public Integer getCodigo() {
@@ -102,12 +83,20 @@ public class Recomendacion implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TourReserva> getTourReservaCollection() {
-        return tourReservaCollection;
+    public List<Tour> getTourList() {
+        return tourList;
     }
 
-    public void setTourReservaCollection(Collection<TourReserva> tourReservaCollection) {
-        this.tourReservaCollection = tourReservaCollection;
+    public void setTourList(List<Tour> tourList) {
+        this.tourList = tourList;
+    }
+
+    public Usuario getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Usuario empresa) {
+        this.empresa = empresa;
     }
 
     @Override
@@ -132,7 +121,7 @@ public class Recomendacion implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Recomendacion[ codigo=" + codigo + " ]";
+        return "logica.modelo.Recomendacion[ codigo=" + codigo + " ]";
     }
     
 }

@@ -7,18 +7,25 @@ package logica.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,49 +36,52 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Salida.findAll", query = "SELECT s FROM Salida s"),
-    @NamedQuery(name = "Salida.findByCodigo", query = "SELECT s FROM Salida s WHERE s.salidaPK.codigo = :codigo"),
+    @NamedQuery(name = "Salida.findByCodigo", query = "SELECT s FROM Salida s WHERE s.codigo = :codigo"),
     @NamedQuery(name = "Salida.findByLugar", query = "SELECT s FROM Salida s WHERE s.lugar = :lugar"),
-    @NamedQuery(name = "Salida.findByFechahora", query = "SELECT s FROM Salida s WHERE s.fechahora = :fechahora"),
-    @NamedQuery(name = "Salida.findByTourreserva", query = "SELECT s FROM Salida s WHERE s.salidaPK.tourreserva = :tourreserva")})
+    @NamedQuery(name = "Salida.findByFechahora", query = "SELECT s FROM Salida s WHERE s.fechahora = :fechahora")})
 public class Salida implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected SalidaPK salidaPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "Codigo")
+    private Integer codigo;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Lugar")
     private String lugar;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Fecha_hora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechahora;
-    @JoinColumn(name = "Tour_reserva", referencedColumnName = "Codigo", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private TourReserva tourReserva;
+    @JoinTable(name = "tour_reserva_salida", joinColumns = {
+        @JoinColumn(name = "Salida", referencedColumnName = "Codigo")}, inverseJoinColumns = {
+        @JoinColumn(name = "Tour_reserva", referencedColumnName = "Codigo")})
+    @ManyToMany
+    private List<TourReserva> tourReservaList;
 
     public Salida() {
     }
 
-    public Salida(SalidaPK salidaPK) {
-        this.salidaPK = salidaPK;
+    public Salida(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public Salida(SalidaPK salidaPK, String lugar, Date fechahora) {
-        this.salidaPK = salidaPK;
+    public Salida(Integer codigo, String lugar, Date fechahora) {
+        this.codigo = codigo;
         this.lugar = lugar;
         this.fechahora = fechahora;
     }
 
-    public Salida(int codigo, int tourreserva) {
-        this.salidaPK = new SalidaPK(codigo, tourreserva);
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public SalidaPK getSalidaPK() {
-        return salidaPK;
-    }
-
-    public void setSalidaPK(SalidaPK salidaPK) {
-        this.salidaPK = salidaPK;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public String getLugar() {
@@ -90,18 +100,19 @@ public class Salida implements Serializable {
         this.fechahora = fechahora;
     }
 
-    public TourReserva getTourReserva() {
-        return tourReserva;
+    @XmlTransient
+    public List<TourReserva> getTourReservaList() {
+        return tourReservaList;
     }
 
-    public void setTourReserva(TourReserva tourReserva) {
-        this.tourReserva = tourReserva;
+    public void setTourReservaList(List<TourReserva> tourReservaList) {
+        this.tourReservaList = tourReservaList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (salidaPK != null ? salidaPK.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -112,7 +123,7 @@ public class Salida implements Serializable {
             return false;
         }
         Salida other = (Salida) object;
-        if ((this.salidaPK == null && other.salidaPK != null) || (this.salidaPK != null && !this.salidaPK.equals(other.salidaPK))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -120,7 +131,7 @@ public class Salida implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Salida[ salidaPK=" + salidaPK + " ]";
+        return "logica.modelo.Salida[ codigo=" + codigo + " ]";
     }
     
 }

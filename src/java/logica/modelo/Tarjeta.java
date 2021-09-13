@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -41,12 +43,17 @@ public class Tarjeta implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Numero")
     private String numero;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "MMYYY")
     private String mmyyy;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "CVC")
     private int cvc;
     @JoinColumn(name = "Usuario", referencedColumnName = "Email")
@@ -129,7 +136,7 @@ public class Tarjeta implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Tarjeta[ codigo=" + codigo + " ]";
+        return "logica.modelo.Tarjeta[ codigo=" + codigo + " ]";
     }
     
 }

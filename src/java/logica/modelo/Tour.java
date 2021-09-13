@@ -6,7 +6,6 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -50,27 +51,44 @@ public class Tour implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Nombre")
     private String nombre;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "Foto")
     private String foto;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Provincia")
     private String provincia;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Canton")
     private String canton;
+    @ManyToMany(mappedBy = "tourList")
+    private List<Incluye> incluyeList;
     @JoinTable(name = "lista_deseo", joinColumns = {
         @JoinColumn(name = "Tour", referencedColumnName = "Codigo")}, inverseJoinColumns = {
         @JoinColumn(name = "Usuario", referencedColumnName = "Email")})
     @ManyToMany
-    private List<Usuario> usuarioCollection;
+    private List<Usuario> usuarioList;
+    @JoinTable(name = "recomendacion_tour", joinColumns = {
+        @JoinColumn(name = "Tour", referencedColumnName = "Codigo")}, inverseJoinColumns = {
+        @JoinColumn(name = "Recomendacion", referencedColumnName = "Codigo")})
+    @ManyToMany
+    private List<Recomendacion> recomendacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
-    private List<Comentario> comentarioCollection;
+    private List<Comentario> comentarioList;
     @JoinColumn(name = "Categoria", referencedColumnName = "Codigo")
     @ManyToOne(optional = false)
     private Categoria categoria;
@@ -78,11 +96,11 @@ public class Tour implements Serializable {
     @ManyToOne(optional = false)
     private Usuario empresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
-    private List<Pregunta> preguntaCollection;
+    private List<Pregunta> preguntaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
-    private Collection<Foto> fotoCollection;
+    private List<Foto> fotoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
-    private List<TourReserva> tourReservaCollection;
+    private List<TourReserva> tourReservaList;
 
     public Tour() {
     }
@@ -149,21 +167,39 @@ public class Tour implements Serializable {
     }
 
     @XmlTransient
-    public List<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
+    public List<Incluye> getIncluyeList() {
+        return incluyeList;
     }
 
-    public void setUsuarioCollection(List<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
+    public void setIncluyeList(List<Incluye> incluyeList) {
+        this.incluyeList = incluyeList;
     }
 
     @XmlTransient
-    public Collection<Comentario> getComentarioCollection() {
-        return comentarioCollection;
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
     }
 
-    public void setComentarioCollection(List<Comentario> comentarioCollection) {
-        this.comentarioCollection = comentarioCollection;
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
+    }
+
+    @XmlTransient
+    public List<Recomendacion> getRecomendacionList() {
+        return recomendacionList;
+    }
+
+    public void setRecomendacionList(List<Recomendacion> recomendacionList) {
+        this.recomendacionList = recomendacionList;
+    }
+
+    @XmlTransient
+    public List<Comentario> getComentarioList() {
+        return comentarioList;
+    }
+
+    public void setComentarioList(List<Comentario> comentarioList) {
+        this.comentarioList = comentarioList;
     }
 
     public Categoria getCategoria() {
@@ -183,30 +219,30 @@ public class Tour implements Serializable {
     }
 
     @XmlTransient
-    public List<Pregunta> getPreguntaCollection() {
-        return preguntaCollection;
+    public List<Pregunta> getPreguntaList() {
+        return preguntaList;
     }
 
-    public void setPreguntaCollection(List<Pregunta> preguntaCollection) {
-        this.preguntaCollection = preguntaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Foto> getFotoCollection() {
-        return fotoCollection;
-    }
-
-    public void setFotoCollection(List<Foto> fotoCollection) {
-        this.fotoCollection = fotoCollection;
+    public void setPreguntaList(List<Pregunta> preguntaList) {
+        this.preguntaList = preguntaList;
     }
 
     @XmlTransient
-    public List<TourReserva> getTourReservaCollection() {
-        return tourReservaCollection;
+    public List<Foto> getFotoList() {
+        return fotoList;
     }
 
-    public void setTourReservaCollection(List<TourReserva> tourReservaCollection) {
-        this.tourReservaCollection = tourReservaCollection;
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<TourReserva> getTourReservaList() {
+        return tourReservaList;
+    }
+
+    public void setTourReservaList(List<TourReserva> tourReservaList) {
+        this.tourReservaList = tourReservaList;
     }
 
     @Override
@@ -231,7 +267,7 @@ public class Tour implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Tour[ codigo=" + codigo + " ]";
+        return "logica.modelo.Tour[ codigo=" + codigo + " ]";
     }
     
 }

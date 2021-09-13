@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,6 +36,7 @@ public class TicketTour implements Serializable {
     @EmbeddedId
     protected TicketTourPK ticketTourPK;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Precio")
     private double precio;
     @JoinColumn(name = "Tipo_Ticket", referencedColumnName = "Codigo", insertable = false, updatable = false)
@@ -114,7 +116,7 @@ public class TicketTour implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.TicketTour[ ticketTourPK=" + ticketTourPK + " ]";
+        return "logica.modelo.TicketTour[ ticketTourPK=" + ticketTourPK + " ]";
     }
     
 }

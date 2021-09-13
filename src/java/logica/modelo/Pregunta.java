@@ -6,7 +6,7 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -43,6 +45,8 @@ public class Pregunta implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 60)
     @Column(name = "Descripcion")
     private String descripcion;
     @JoinColumn(name = "Tour", referencedColumnName = "Codigo")
@@ -52,7 +56,7 @@ public class Pregunta implements Serializable {
     @ManyToOne(optional = false)
     private Usuario usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pregunta")
-    private Collection<Respuesta> respuestaCollection;
+    private List<Respuesta> respuestaList;
 
     public Pregunta() {
     }
@@ -99,12 +103,12 @@ public class Pregunta implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Respuesta> getRespuestaCollection() {
-        return respuestaCollection;
+    public List<Respuesta> getRespuestaList() {
+        return respuestaList;
     }
 
-    public void setRespuestaCollection(Collection<Respuesta> respuestaCollection) {
-        this.respuestaCollection = respuestaCollection;
+    public void setRespuestaList(List<Respuesta> respuestaList) {
+        this.respuestaList = respuestaList;
     }
 
     @Override
@@ -129,7 +133,7 @@ public class Pregunta implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Pregunta[ codigo=" + codigo + " ]";
+        return "logica.modelo.Pregunta[ codigo=" + codigo + " ]";
     }
     
 }

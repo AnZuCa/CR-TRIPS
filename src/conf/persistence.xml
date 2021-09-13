@@ -7,6 +7,17 @@
     <class>logica.modelo.Respuesta</class>
     <class>logica.modelo.TicketTour</class>
     <class>logica.modelo.Comentario</class>
+    <class>logica.modelo.Categoria</class>
+    <class>logica.modelo.Foto</class>
+    <class>logica.modelo.Recomendacion</class>
+    <class>logica.modelo.Tour</class>
+    <class>logica.modelo.TipoTicket</class>
+    <class>logica.modelo.Incluye</class>
+    <class>logica.modelo.Pregunta</class>
+    <class>logica.modelo.Usuario</class>
+    <class>logica.modelo.Salida</class>
+    <class>logica.modelo.Reserva</class>
+    <class>logica.modelo.Telefono</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CR_TRIPS?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

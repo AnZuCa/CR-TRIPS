@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -39,6 +41,8 @@ public class Foto implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 500)
     @Column(name = "Url")
     private String url;
     @JoinColumn(name = "Tour", referencedColumnName = "Codigo")
@@ -103,7 +107,7 @@ public class Foto implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Foto[ codigo=" + codigo + " ]";
+        return "logica.modelo.Foto[ codigo=" + codigo + " ]";
     }
     
 }

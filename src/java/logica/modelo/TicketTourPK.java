@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -18,9 +19,11 @@ import javax.persistence.Embeddable;
 public class TicketTourPK implements Serializable {
 
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Tour_reserva")
     private int tourreserva;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Tipo_Ticket")
     private int tipoTicket;
 
@@ -74,7 +77,7 @@ public class TicketTourPK implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.TicketTourPK[ tourreserva=" + tourreserva + ", tipoTicket=" + tipoTicket + " ]";
+        return "logica.modelo.TicketTourPK[ tourreserva=" + tourreserva + ", tipoTicket=" + tipoTicket + " ]";
     }
     
 }

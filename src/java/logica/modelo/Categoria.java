@@ -6,7 +6,7 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,10 +43,12 @@ public class Categoria implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "Descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private Collection<Tour> tourCollection;
+    private List<Tour> tourList;
 
     public Categoria() {
     }
@@ -75,12 +79,12 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Tour> getTourCollection() {
-        return tourCollection;
+    public List<Tour> getTourList() {
+        return tourList;
     }
 
-    public void setTourCollection(Collection<Tour> tourCollection) {
-        this.tourCollection = tourCollection;
+    public void setTourList(List<Tour> tourList) {
+        this.tourList = tourList;
     }
 
     @Override
@@ -105,7 +109,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.Categoria[ codigo=" + codigo + " ]";
+        return "logica.modelo.Categoria[ codigo=" + codigo + " ]";
     }
     
 }

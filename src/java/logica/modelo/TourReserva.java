@@ -6,8 +6,8 @@
 package logica.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -25,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -50,32 +50,28 @@ public class TourReserva implements Serializable {
     @Column(name = "Codigo")
     private Integer codigo;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Fecha_salida")
     @Temporal(TemporalType.DATE)
     private Date fechasalida;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Fecha_llegada")
     @Temporal(TemporalType.DATE)
     private Date fechallegada;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "Cantidad_tickets")
     private int cantidadtickets;
-    @ManyToMany(mappedBy = "tourReservaCollection")
-    private Collection<Incluye> incluyeCollection;
-    @JoinTable(name = "recomendacion_tour", joinColumns = {
-        @JoinColumn(name = "Tour_reserva_Codigo", referencedColumnName = "Codigo")}, inverseJoinColumns = {
-        @JoinColumn(name = "Recomendacion", referencedColumnName = "Codigo")})
-    @ManyToMany
-    private Collection<Recomendacion> recomendacionCollection;
+    @ManyToMany(mappedBy = "tourReservaList")
+    private List<Salida> salidaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tourReserva")
-    private Collection<TicketTour> ticketTourCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tourReserva")
-    private Collection<Salida> salidaCollection;
+    private List<TicketTour> ticketTourList;
     @JoinColumn(name = "Tour", referencedColumnName = "Codigo")
     @ManyToOne(optional = false)
     private Tour tour;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tourreserva")
-    private Collection<Reserva> reservaCollection;
+    private List<Reserva> reservaList;
 
     public TourReserva() {
     }
@@ -124,39 +120,21 @@ public class TourReserva implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Incluye> getIncluyeCollection() {
-        return incluyeCollection;
+    public List<Salida> getSalidaList() {
+        return salidaList;
     }
 
-    public void setIncluyeCollection(Collection<Incluye> incluyeCollection) {
-        this.incluyeCollection = incluyeCollection;
-    }
-
-    @XmlTransient
-    public Collection<Recomendacion> getRecomendacionCollection() {
-        return recomendacionCollection;
-    }
-
-    public void setRecomendacionCollection(Collection<Recomendacion> recomendacionCollection) {
-        this.recomendacionCollection = recomendacionCollection;
+    public void setSalidaList(List<Salida> salidaList) {
+        this.salidaList = salidaList;
     }
 
     @XmlTransient
-    public Collection<TicketTour> getTicketTourCollection() {
-        return ticketTourCollection;
+    public List<TicketTour> getTicketTourList() {
+        return ticketTourList;
     }
 
-    public void setTicketTourCollection(Collection<TicketTour> ticketTourCollection) {
-        this.ticketTourCollection = ticketTourCollection;
-    }
-
-    @XmlTransient
-    public Collection<Salida> getSalidaCollection() {
-        return salidaCollection;
-    }
-
-    public void setSalidaCollection(Collection<Salida> salidaCollection) {
-        this.salidaCollection = salidaCollection;
+    public void setTicketTourList(List<TicketTour> ticketTourList) {
+        this.ticketTourList = ticketTourList;
     }
 
     public Tour getTour() {
@@ -168,12 +146,12 @@ public class TourReserva implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Reserva> getReservaCollection() {
-        return reservaCollection;
+    public List<Reserva> getReservaList() {
+        return reservaList;
     }
 
-    public void setReservaCollection(Collection<Reserva> reservaCollection) {
-        this.reservaCollection = reservaCollection;
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
     }
 
     @Override
@@ -198,7 +176,7 @@ public class TourReserva implements Serializable {
 
     @Override
     public String toString() {
-        return "presentacion.modelo.TourReserva[ codigo=" + codigo + " ]";
+        return "logica.modelo.TourReserva[ codigo=" + codigo + " ]";
     }
     
 }

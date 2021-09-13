@@ -5,14 +5,23 @@
  */
 package presentacion;
 
+import com.google.gson.Gson;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import logica.modelo.Model;
+import logica.modelo.Usuario;
+
 
 /**
  * REST Web Service
@@ -24,30 +33,40 @@ public class UsuarioResource {
 
     @Context
     private UriInfo context;
-
+    @Context
+    private HttpServletRequest request;
     /**
      * Creates a new instance of UsuarioResource
      */
     public UsuarioResource() {
     }
-
-    /**
-     * Retrieves representation of an instance of presentacion.UsuarioResource
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
+    
+    @POST
+    @Path("/Login")
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response login(Usuario user) {
         //TODO return proper representation object
-        throw new UnsupportedOperationException();
+      
+        try {
+            
+           HttpSession session = request.getSession(true);
+           Usuario u = Model.instance().Login(user);
+         
+            if (u != null) {
+                session.setAttribute("usuario", u);
+                String json = new Gson().toJson(u);
+               
+                return Response.ok(json, MediaType.APPLICATION_JSON).build();
+                     
+            } else {
+                throw new NotFoundException();
+            }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.SEE_OTHER).entity("Error" + e.toString()).build();
+
+        }
     }
 
-    /**
-     * PUT method for updating or creating an instance of UsuarioResource
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_XML)
-    public void putXml(String content) {
-    }
 }
