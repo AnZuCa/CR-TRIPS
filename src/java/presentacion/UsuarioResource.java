@@ -13,6 +13,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -41,7 +42,27 @@ public class UsuarioResource {
      */
     public UsuarioResource() {
     }
+    @POST
+    @Path("/Registrar")
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response RegistrarUsuario(Usuario user) {
+        boolean flag = Model.instance().RegistrarUsuario(user);
+        if (flag == true)
+        {
+            String json = new Gson().toJson("Registro correcto de usuario");
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el usuario").build();
     
+    }
+    @DELETE
+    public void Logout()
+    {
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("usuario");
+        session.invalidate();
+    }
     @POST
     @Path("/Login")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

@@ -58,6 +58,26 @@ public class DAOCategoria extends Conexion{
         }
         return null;
     }
+    public boolean RegistrarCategoria(Categoria categoria)
+    {
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("insert into cr_trips.Categoria(Descripcion) values(?) ");
+            pst.clearParameters();
+            pst.setString(1, categoria.getDescripcion());
+            if (pst.executeUpdate() != 1) {
+                return false;
+
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return false;
+    }
     public Categoria DibujarCategoria(Integer codigo, String descripcion)
     {   
         return new Categoria(codigo,descripcion);

@@ -11,66 +11,66 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import logica.modelo.Conexion;
-import logica.modelo.Recomendacion;
+import logica.modelo.Incluye;
 import logica.modelo.Usuario;
 
 /**
  *
  * @author hp
  */
-public class DAORecomendacion extends Conexion {
-     public List<Recomendacion> ObtenerRecomendacionesPorTour(Integer codigotour)
+public class DAOIncluye extends Conexion{
+     public List<Incluye> ObtenerIncluyesPorTour(Integer codigotour)
     {
-        List<Recomendacion> categorias =  new ArrayList<>();
+        List<Incluye> incluyes =  new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select r.Codigo, r.Descripcion from cr_trips.recomendacion as r inner join cr_trips.recomendacion_tour as rt on r.Codigo = rt.Recomendacion where rt.Tour = ? ");
+            pst = getConexion().prepareStatement("select r.Codigo, r.Descripcion from cr_trips.incluye as r inner join cr_trips.Incluye_tour as rt on r.Codigo = rt.Incluye where rt.Tour = ? ");
             pst.clearParameters();
             pst.setInt(1, codigotour);
             rs = pst.executeQuery();
             if (rs.next()) {
-                categorias.add(DibujarRecomendacion(rs.getInt("Codigo"),rs.getString("Descripcion")));
+                incluyes.add(DibujarIncluye(rs.getInt("Codigo"),rs.getString("Descripcion")));
 
             }
-            return categorias;
+            return incluyes;
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
         return null;
     }
-      public List<Recomendacion> ObtenerRecomendacionesPorEmpresa(String emailempresa)
+      public List<Incluye> ObtenerIncluyesPorEmpresa(String emailempresa)
     {
-        List<Recomendacion> recomendaciones =  new ArrayList<>();
+        List<Incluye> incluyes =  new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select * from cr_trips.Recomendacion where Empresa = ? ");
+            pst = getConexion().prepareStatement("select * from cr_trips.Incluye where Empresa = ? ");
             pst.clearParameters();
             pst.setString(1, emailempresa);
             rs = pst.executeQuery();
             if (rs.next()) {
-                recomendaciones.add(DibujarRecomendacion(rs.getInt("Codigo"),rs.getString("Descripcion")));
+                incluyes.add(DibujarIncluye(rs.getInt("Codigo"),rs.getString("Descripcion")));
 
             }
-            return recomendaciones;
+            return incluyes;
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
         return null;
     }
-    public boolean RegistrarRecomendacion(Recomendacion recomendacion,Usuario usuario)
+    public boolean RegistrarIncluye(Incluye incluye,Usuario usuario)
     {
         
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("insert into cr_trips.Recomendacion(Descripcion, Empresa) values(?,?) ");
+            pst = getConexion().prepareStatement("insert into cr_trips.Incluye(Descripcion, Empresa) values(?,?) ");
             pst.clearParameters();
-            pst.setString(1, recomendacion.getDescripcion());
+            pst.setString(1, incluye.getDescripcion());
             pst.setString(2, usuario.getEmail());
             if (pst.executeUpdate() != 1) {
                 return false;
@@ -82,14 +82,14 @@ public class DAORecomendacion extends Conexion {
         }
         return false;
     }
-    public boolean RegistrarRecomendacionTour(int incluye,String tour)
+    public boolean RegistrarIncluyeTour(int incluye,String tour)
     {
         
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("insert into cr_trips.Recomendacion_tour values(?,?) ");
+            pst = getConexion().prepareStatement("insert into cr_trips.Incluye_tour values(?,?) ");
             pst.clearParameters();
             pst.setInt(1, incluye);
             pst.setString(2, tour);
@@ -103,8 +103,8 @@ public class DAORecomendacion extends Conexion {
         }
         return false;
     }
-    public Recomendacion DibujarRecomendacion(Integer codigo, String descripcion)
+    public Incluye DibujarIncluye(Integer codigo, String descripcion)
     {   
-        return new Recomendacion(codigo,descripcion);
+        return new Incluye(codigo,descripcion);
     }
 }

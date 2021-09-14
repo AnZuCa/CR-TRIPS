@@ -101,7 +101,10 @@ public class Tour implements Serializable {
     private List<Foto> fotoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
     private List<TourReserva> tourReservaList;
+    private Usuario usuario;
 
+    
+    
     public Tour() {
     }
 
@@ -118,8 +121,18 @@ public class Tour implements Serializable {
         this.canton = canton;
     }
 
+
+
     public Integer getCodigo() {
         return codigo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public void setCodigo(Integer codigo) {

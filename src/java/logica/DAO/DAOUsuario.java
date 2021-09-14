@@ -38,6 +38,31 @@ public class DAOUsuario extends Conexion{
         }
         return null;
     }
+    public boolean RegistrarUsuario(Usuario usuario)
+    {
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("insert into cr_trips.usuario values(?,?,?,?,?,?) ");
+            pst.clearParameters();
+            pst.setString(1, usuario.getEmail());
+            pst.setString(2, usuario.getNombre());
+            pst.setString(3, usuario.getApellidos());
+            pst.setString(4, usuario.getFecNacimiento());
+            pst.setInt(5, usuario.getTipousuario());
+            pst.setString(6, usuario.getPassword());
+            if (pst.executeUpdate() != 1) {
+                return false;
+
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return false;
+    }
     public Usuario DibujarUsuario(String email, String nombre, String apellidos, String nacimiento, Integer tipo, String password)
     {   
         return new Usuario(email,nombre,apellidos,nacimiento,tipo,password);
