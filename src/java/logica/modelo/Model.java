@@ -19,6 +19,7 @@ public class Model {
     private DAOTour daotour = new DAOTour();
     private DAOIncluye daoincluye = new DAOIncluye();
     private DAOComentario daocomentario = new DAOComentario();
+    private DAOFoto daofoto = new DAOFoto();
     private static Model uniqueInstance;
     public static Model instance(){
         if (uniqueInstance == null){
@@ -99,17 +100,25 @@ public class Model {
             for(Incluye i: tour.getIncluyeList()){
                 daoincluye.RegistrarIncluyeTour(codigo, tour.getUsuario().getEmail());
             }
-        
-       return true;
+            for(Foto f: tour.getFotoList()){
+                Tour tour1 = new Tour();
+                tour1.setCodigo(codigo);
+                f.setTour(tour);
+                daofoto.RegistrarFoto(f);
+            }
+            return true;
         }
-      return false;
+        return false;
+   
     }
+     
     
    public Tour ObtenerTour(int codigo)
    {
        Tour tour = daotour.ObtenerTour(codigo);
        tour.setRecomendacionList(daorecomendacion.ObtenerRecomendacionesPorTour(codigo));
        tour.setIncluyeList(daoincluye.ObtenerIncluyesPorTour(codigo));
+       tour.setFotoList(daofoto.ObtenerFotosPorTour(codigo));
        return tour;
        
    }
@@ -132,6 +141,14 @@ public class Model {
     public List<Comentario> ObtenerComentariosPorTour(int tour)
     {
         return daocomentario.ObtenerComentariosPorTour(tour);
+    }
+    public boolean RegistrarFoto(Foto foto)
+    {
+        return daofoto.RegistrarFoto(foto);
+    }
+    public List<Foto> ObtenerFotosPorTour(int tour)
+    {
+        return daofoto.ObtenerFotosPorTour(tour);
     }
     public Usuario Login(Usuario user)
     {
