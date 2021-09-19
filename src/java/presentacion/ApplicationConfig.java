@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(presentacion.CategoriaResource.class);
+        resources.add(presentacion.ComentarioResource.class);
         resources.add(presentacion.IncluyeResource.class);
         resources.add(presentacion.RecomendacionResource.class);
         resources.add(presentacion.TarjetaResource.class);

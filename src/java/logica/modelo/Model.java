@@ -18,6 +18,7 @@ public class Model {
     private DAOTarjeta daotarjeta = new DAOTarjeta();
     private DAOTour daotour = new DAOTour();
     private DAOIncluye daoincluye = new DAOIncluye();
+    private DAOComentario daocomentario = new DAOComentario();
     private static Model uniqueInstance;
     public static Model instance(){
         if (uniqueInstance == null){
@@ -123,6 +124,14 @@ public class Model {
     public List<Incluye> ObtenerIncluyesPorEmpresa(String emailempresa)
     {
         return daoincluye.ObtenerIncluyesPorEmpresa(emailempresa);
+    }
+    public boolean RegistrarComentario(Comentario comentario)
+    {
+        return daocomentario.RegistrarComentarioTour(comentario);
+    }
+    public List<Comentario> ObtenerComentariosPorTour(int tour)
+    {
+        return daocomentario.ObtenerComentariosPorTour(tour);
     }
     public Usuario Login(Usuario user)
     {
