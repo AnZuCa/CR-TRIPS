@@ -30,7 +30,7 @@ public class DAOUsuario extends Conexion{
             pst.setString(2, user.getPassword());
             rs = pst.executeQuery();
             if (rs.next()) {
-                return DibujarUsuario(rs.getString("Email"),rs.getString("Nombre"),rs.getString("Apellidos"),rs.getString("FecNacimiento"),rs.getInt("Tipo_usuario"),rs.getString("Password"));
+                return DibujarUsuario(rs.getString("Email"),rs.getString("Nombre"),rs.getString("Apellidos"),rs.getString("FecNacimiento"),rs.getInt("Tipo_usuario"),rs.getString("Password"),rs.getString("Subscripcion"));
 
             }
         } catch (SQLException e) {
@@ -45,7 +45,7 @@ public class DAOUsuario extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("insert into cr_trips.usuario values(?,?,?,?,?,?) ");
+            pst = getConexion().prepareStatement("insert into cr_trips.usuario values(?,?,?,?,?,?,?) ");
             pst.clearParameters();
             pst.setString(1, usuario.getEmail());
             pst.setString(2, usuario.getNombre());
@@ -53,6 +53,7 @@ public class DAOUsuario extends Conexion{
             pst.setString(4, usuario.getFecNacimiento());
             pst.setInt(5, usuario.getTipousuario());
             pst.setString(6, usuario.getPassword());
+            pst.setString(7, usuario.getSubscripcion());
             if (pst.executeUpdate() != 1) {
                 return false;
 
@@ -63,8 +64,8 @@ public class DAOUsuario extends Conexion{
         }
         return false;
     }
-    public Usuario DibujarUsuario(String email, String nombre, String apellidos, String nacimiento, Integer tipo, String password)
+    public Usuario DibujarUsuario(String email, String nombre, String apellidos, String nacimiento, Integer tipo, String password, String subscripcion)
     {   
-        return new Usuario(email,nombre,apellidos,nacimiento,tipo,password);
+        return new Usuario(email,nombre,apellidos,nacimiento,tipo,password,subscripcion);
     }
 }

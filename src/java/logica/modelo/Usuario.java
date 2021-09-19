@@ -71,6 +71,10 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "Password")
     private String password;
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "Subscripcion")
+    private String subscripcion;
     @ManyToMany(mappedBy = "usuarioList")
     private List<Tour> tourList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
@@ -99,13 +103,22 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public Usuario(String email, String nombre, String apellidos, String fecNacimiento, int tipousuario, String password) {
+    public Usuario(String email, String nombre, String apellidos, String fecNacimiento, int tipousuario, String password, String subscripcion) {
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fecNacimiento = fecNacimiento;
         this.tipousuario = tipousuario;
         this.password = password;
+        this.subscripcion = subscripcion;
+    }
+
+    public String getSubscripcion() {
+        return subscripcion;
+    }
+
+    public void setSubscripcion(String subscripcion) {
+        this.subscripcion = subscripcion;
     }
 
     public String getEmail() {

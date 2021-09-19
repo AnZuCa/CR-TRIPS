@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(presentacion.CategoriaResource.class);
         resources.add(presentacion.ComentarioResource.class);
         resources.add(presentacion.IncluyeResource.class);
+        resources.add(presentacion.ListaDeseoResource.class);
         resources.add(presentacion.RecomendacionResource.class);
         resources.add(presentacion.TarjetaResource.class);
         resources.add(presentacion.TelefonoResource.class);

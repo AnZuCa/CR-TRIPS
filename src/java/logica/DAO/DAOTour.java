@@ -132,12 +132,12 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select * from cr_trips.Tour where Codigo = ? ");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.codigo = ?");
             pst.clearParameters();
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
             if (rs.next()) {
-                return DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"));
+                return DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom"));
 
             }
 

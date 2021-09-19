@@ -56,6 +56,15 @@ public class UsuarioResource {
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el usuario").build();
     
     }
+    @GET
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response GetUsuario() {
+        HttpSession session = request.getSession(true);
+        Usuario user = (Usuario) session.getAttribute("usuario");
+        String json = new Gson().toJson(user);
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+
+    }
     @DELETE
     public void Logout()
     {

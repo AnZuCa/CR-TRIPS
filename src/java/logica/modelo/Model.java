@@ -20,6 +20,7 @@ public class Model {
     private DAOIncluye daoincluye = new DAOIncluye();
     private DAOComentario daocomentario = new DAOComentario();
     private DAOFoto daofoto = new DAOFoto();
+    private DAOListaDeseo daolistadeseo = new DAOListaDeseo();
     private static Model uniqueInstance;
     public static Model instance(){
         if (uniqueInstance == null){
@@ -149,6 +150,14 @@ public class Model {
     public List<Foto> ObtenerFotosPorTour(int tour)
     {
         return daofoto.ObtenerFotosPorTour(tour);
+    }
+    public boolean RegistrarTourListaDeseo(ListaDeseo listadeseo)
+    {
+        return daolistadeseo.RegistrarTourDeseo(listadeseo);
+    }
+    public List<Tour> ObtenerListaDeseo(Usuario user)
+    {
+        return daolistadeseo.ObtenerListaDeseo(user);
     }
     public Usuario Login(Usuario user)
     {
