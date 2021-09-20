@@ -72,7 +72,9 @@ public class TourReserva implements Serializable {
     private Tour tour;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tourreserva")
     private List<Reserva> reservaList;
-
+    private List<TourReservaSalida> tourreservasalidalist;
+            
+            
     public TourReserva() {
     }
 
@@ -85,6 +87,14 @@ public class TourReserva implements Serializable {
         this.fechasalida = fechasalida;
         this.fechallegada = fechallegada;
         this.cantidadtickets = cantidadtickets;
+    }
+
+    public List<TourReservaSalida> getTourreservasalidalist() {
+        return tourreservasalidalist;
+    }
+
+    public void setTourreservasalidalist(List<TourReservaSalida> tourreservasalidalist) {
+        this.tourreservasalidalist = tourreservasalidalist;
     }
 
     public Integer getCodigo() {

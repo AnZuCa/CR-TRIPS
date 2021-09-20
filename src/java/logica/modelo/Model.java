@@ -21,6 +21,9 @@ public class Model {
     private DAOComentario daocomentario = new DAOComentario();
     private DAOFoto daofoto = new DAOFoto();
     private DAOListaDeseo daolistadeseo = new DAOListaDeseo();
+    private DAOTourReserva daotourreserva = new DAOTourReserva();
+    private DAOTourReservaSalida daotourreservasalida = new DAOTourReservaSalida();
+    private DAOTicketTour daotickettour = new DAOTicketTour();
     private static Model uniqueInstance;
     public static Model instance(){
         if (uniqueInstance == null){
@@ -112,7 +115,27 @@ public class Model {
         return false;
    
     }
-     
+     public boolean RegistrarRservaTour(TourReserva tourreserva)
+    {
+        boolean flag = daotourreserva.RegistrarTourReserva(tourreserva);
+        if (flag ==true)
+        {
+            int codigo = daotourreserva.ObtenerUltimoTourReservaRegistrado(tourreserva.getTour().getCodigo());
+            TourReserva tr = new TourReserva();
+            tr.setCodigo(codigo);
+            for(TicketTour t: tourreserva.getTicketTourList()){
+                t.setTourReserva(tourreserva);
+                daotickettour.RegistrarTicketTour(t);
+            }
+            for(TourReservaSalida trs: tourreserva.getTourreservasalidalist()){
+                trs.setTourreserva(tr);
+                daotourreservasalida.RegistrarTourRservaSalida(trs);
+            }
+            return true;
+        }
+        return false;
+   
+    }
     
    public Tour ObtenerTour(int codigo)
    {
