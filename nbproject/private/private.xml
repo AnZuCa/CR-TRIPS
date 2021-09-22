@@ -4,39 +4,55 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Usuario.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOUsuario.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/CategoriaResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Foto.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/IncluyeResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Telefono.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAORecomendacion.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/UsuarioResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTelefono.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/build.xml</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TourResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOCategoria.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TipoTicket.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaTourResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TicketTourPK.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TicketTour.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TelefonoResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOIncluye.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Comentario.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOComentario.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/ConvertidorFechaSQL.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTicketTour.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/ListaDeseo.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOUsuario.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TipoTicketResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/UsuarioResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Tarjeta.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/conf/MANIFEST.MF</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Incluye.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TourResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTipoTicket.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOCategoria.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ApplicationConfig.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TipoTicket.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TourReserva.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TarjetaResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TicketTourPK.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ListaDeseoResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TourReservaSalida.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Categoria.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/web/WEB-INF/glassfish-web.xml</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Tour.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTour.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOListaDeseo.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Salida.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TelefonoResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTourReserva.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Conexion.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/RecomendacionResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOIncluye.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTourReservaSalida.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTarjeta.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Model.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Comentario.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOFoto.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/web/index.html</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Recomendacion.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ComentarioResource.java</file>
         </group>
     </open-files>
 </project-private>
