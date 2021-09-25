@@ -69,6 +69,8 @@ public class Reserva implements Serializable {
     @ManyToOne(optional = false)
     private Usuario usuario;
 
+    
+    
     public Reserva() {
     }
 
@@ -83,6 +85,8 @@ public class Reserva implements Serializable {
         this.tipopago = tipopago;
         this.fecha = fecha;
     }
+
+
 
     public Integer getCodigo() {
         return codigo;

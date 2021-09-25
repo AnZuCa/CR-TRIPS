@@ -191,6 +191,10 @@ public class Model {
     {
         return daotipoticket.ObtenerTipoTicketPorEmpresa(user.getEmail());
     }
+    public List<TourReserva> ObtenerToursReserva(int tour)
+    {
+        return daotourreserva.ObtenerTourReserva(tour);
+    }
     public Usuario Login(Usuario user)
     {
         return daousuario.ObtenerUsuario(user);

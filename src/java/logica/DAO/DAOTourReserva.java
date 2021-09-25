@@ -8,9 +8,16 @@ package logica.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import logica.modelo.Conexion;
+import logica.modelo.Salida;
 import logica.modelo.Tour;
 import logica.modelo.TourReserva;
+import logica.modelo.TourReservaSalida;
 
 /**
  *
@@ -58,5 +65,35 @@ public class DAOTourReserva extends Conexion{
             System.err.println("Error" + e);
         }
         return 0;
+    }
+    public List<TourReserva> ObtenerTourReserva(int tour)
+    {
+        List<TourReserva> tourreserva=  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select * from cr_trips.Tour_reserva where Tour = ? ");
+            pst.clearParameters();
+            pst.setInt(1, tour);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tourreserva.add(DibujarTourReserva(rs.getInt("Codigo"), rs.getInt("Tour"), rs.getDate("Fecha_salida"),rs.getDate("Fecha_llegada"),rs.getInt("Cantidad_tickets")));
+
+            }
+            return tourreserva;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+    public TourReserva DibujarTourReserva(int codigo, int tour,Date fecha_salida,Date fecha_llegada,int cantidad)
+    {
+        DAOTourReservaSalida trs = new DAOTourReservaSalida();
+        DAOTicketTour tt = new DAOTicketTour();
+        TourReserva tr = new TourReserva(codigo,fecha_salida,fecha_llegada,cantidad);
+        tr.setTicketTourList(tt.ObtenerTicketsTour(tour));
+        tr.setTourreservasalidalist(trs.ObtenerTourReservaSalidas(tour));
+        return tr;
     }
 }

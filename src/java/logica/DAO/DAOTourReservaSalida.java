@@ -8,8 +8,13 @@ package logica.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import logica.modelo.Conexion;
+import logica.modelo.Salida;
 import logica.modelo.TicketTour;
+import logica.modelo.TipoTicket;
 import logica.modelo.TourReservaSalida;
 
 /**
@@ -37,5 +42,33 @@ public class DAOTourReservaSalida extends Conexion{
             System.err.println("Error" + e);
         }
         return false;
+    }
+    public List<TourReservaSalida> ObtenerTourReservaSalidas(int tour_reserva)
+    {
+        List<TourReservaSalida> tourreservasalida=  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select s.Codigo, s.Lugar, s.Fecha_hora from cr_trips.Tour_reserva_salida as trs inner join cr_trips.Salida as s on trs.Salida = s.Codigo where trs.Tour_reserva = ? ");
+            pst.clearParameters();
+            pst.setInt(1, tour_reserva);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tourreservasalida.add(DibujarTourReservaSalida(rs.getInt("Codigo"), rs.getString("Lugar"), rs.getDate("Fecha_hora")));
+
+            }
+            return tourreservasalida;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+    public TourReservaSalida DibujarTourReservaSalida(int codigo, String lugar,Date fecha)
+    {
+        Salida s = new Salida(codigo,lugar,fecha);
+        TourReservaSalida trs = new TourReservaSalida();
+        trs.setSalida(s);
+        return trs;
     }
 }
