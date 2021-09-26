@@ -89,6 +89,10 @@ public class Model {
     {
          return daotour.ObtenerTourPorCanton(canton);
     }
+    public List<Tour> ObtenerToursPorFechaSalida(String fecha)
+    {
+         return daotour.ObtenerTourPorFechaSalida(fecha);
+    }
     public List<Telefono> ObtenerTelefonos(Usuario user)
     {
         return daotelefono.ObtenerTelefonos(user);
@@ -194,6 +198,10 @@ public class Model {
     public List<TourReserva> ObtenerToursReserva(int tour)
     {
         return daotourreserva.ObtenerTourReserva(tour);
+    }
+    public TourReserva ObtenerTourReservaPorCodigo(int Codigo)
+    {
+        return daotourreserva.ObtenerTourReservaPorCodigo(Codigo);
     }
     public Usuario Login(Usuario user)
     {

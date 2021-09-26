@@ -59,6 +59,14 @@ public class TourResource {
     
     }
     @GET
+    @Path("/FechaSalida")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getToursPorFechaSalida(@QueryParam("fecha") String fecha) {
+        String json = new Gson().toJson(Model.instance().ObtenerToursPorFechaSalida(fecha));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    
+    }
+    @GET
     @Path("/Provincia")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getToursPorProvincia(@QueryParam("provincia") String provincia) {

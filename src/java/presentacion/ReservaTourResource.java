@@ -55,8 +55,16 @@ public class ReservaTourResource {
     }
     @GET
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response getCategoria(@QueryParam("tour") Integer tour) {
+    public Response getReservaTours(@QueryParam("tour") Integer tour) {
         String json = new Gson().toJson(Model.instance().ObtenerToursReserva(tour));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    
+    }
+    @GET
+    @Path("/Codigo")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getReservaTour(@QueryParam("codigo") int codigo) {
+        String json = new Gson().toJson(Model.instance().ObtenerTourReservaPorCodigo(codigo));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }

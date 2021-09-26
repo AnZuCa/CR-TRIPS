@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import logica.modelo.Categoria;
@@ -64,6 +65,7 @@ public class DAOTour extends Conexion{
         }
         return null;
     }
+    
     public List<Tour> ObtenerTourPorCategoria(int categoria)
     {
         List<Tour> tour =  new ArrayList<>();
@@ -114,6 +116,29 @@ public class DAOTour extends Conexion{
             pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.Empresa = ? ");
             pst.clearParameters();
             pst.setString(1, email_empresa);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
+
+            }
+            return tour;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+    public List<Tour> ObtenerTourPorFechaSalida(String fecha)
+    {
+        Date fecha1 = new Date(fecha);
+        ConvertidorFechaSQL convert = new ConvertidorFechaSQL();
+        List<Tour> tour =  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on t.Codigo = tr.Tour inner join cr_trips.Categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where tr.Fecha_salida = ?");
+            pst.clearParameters();
+            pst.setDate(1, convert.Convertidor(fecha1));
             rs = pst.executeQuery();
             if (rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
