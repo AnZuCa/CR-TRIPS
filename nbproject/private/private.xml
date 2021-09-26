@@ -18,6 +18,7 @@
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaTourResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TicketTourPK.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TicketTour.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TelefonoResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOIncluye.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Comentario.java</file>
@@ -34,6 +35,7 @@
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Incluye.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTipoTicket.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOReserva.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ApplicationConfig.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TourReserva.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TarjetaResource.java</file>

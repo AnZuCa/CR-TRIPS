@@ -38,6 +38,25 @@ public class DAOUsuario extends Conexion{
         }
         return null;
     }
+    public Usuario ObtenerUsuarioReserva(String correo)
+    {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select * from cr_trips.Usuario where Email = ? ");
+            pst.clearParameters();
+            pst.setString(1,correo);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return DibujarUsuario(rs.getString("Email"),rs.getString("Nombre"),rs.getString("Apellidos"),rs.getString("FecNacimiento"),rs.getInt("Tipo_usuario"),"",rs.getString("Subscripcion"));
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
     public boolean RegistrarUsuario(Usuario usuario)
     {
         

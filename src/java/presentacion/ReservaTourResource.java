@@ -6,6 +6,7 @@
 package presentacion;
 
 import com.google.gson.Gson;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -30,7 +31,8 @@ import logica.modelo.Usuario;
  */
 @Path("ReservaTour")
 public class ReservaTourResource {
-
+    @Context
+    private HttpServletRequest request;
     @Context
     private UriInfo context;
 
@@ -57,6 +59,16 @@ public class ReservaTourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getReservaTours(@QueryParam("tour") Integer tour) {
         String json = new Gson().toJson(Model.instance().ObtenerToursReserva(tour));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    
+    }
+    @GET
+    @Path("/Empresa")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getReservaToursPorEmpresa() {
+        HttpSession session = request.getSession(true);
+        Usuario user = (Usuario) session.getAttribute("usuario");
+        String json = new Gson().toJson(Model.instance().ObtenerToursReservaPorEmpresa(user.getEmail()));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }

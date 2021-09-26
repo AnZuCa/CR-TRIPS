@@ -87,6 +87,27 @@ public class DAOTourReserva extends Conexion{
         }
         return null;
     }
+    public List<TourReserva> ObtenerTourReservaPorEmpresa(String empresa)
+    {
+        List<TourReserva> tourreserva=  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select tr.Codigo,tr.Tour,tr.Fecha_salida, tr.Fecha_llegada,tr.Cantidad_tickets from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on tr.Tour=t.Codigo where t.Empresa = ? ");
+            pst.clearParameters();
+            pst.setString(1, empresa);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tourreserva.add(DibujarTourReserva(rs.getInt("Codigo"), rs.getInt("Tour"), rs.getDate("Fecha_salida"),rs.getDate("Fecha_llegada"),rs.getInt("Cantidad_tickets")));
+
+            }
+            return tourreserva;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
     public TourReserva ObtenerTourReservaPorCodigo(int Codigo)
     {
 
