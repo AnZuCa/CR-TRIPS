@@ -90,6 +90,10 @@ public class Model {
     {
          return daotour.ObtenerTourPorCanton(canton);
     }
+    public List<Tour> ObtenerTours()
+    {
+         return daotour.ObtenerTours();
+    }
     public List<Tour> ObtenerToursPorFechaSalida(String fecha)
     {
          return daotour.ObtenerTourPorFechaSalida(fecha);

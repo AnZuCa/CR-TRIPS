@@ -41,7 +41,14 @@ public class TourResource {
      */
     public TourResource() {
     }
-
+    @GET
+    @Path("/Todos")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getTours() {
+        String json = new Gson().toJson(Model.instance().ObtenerTours());
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    
+    }
     @GET
     @Path("/Categoria")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)

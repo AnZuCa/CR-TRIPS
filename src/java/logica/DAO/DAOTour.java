@@ -23,6 +23,26 @@ import logica.modelo.Usuario;
  * @author hp
  */
 public class DAOTour extends Conexion{
+    public List<Tour> ObtenerTours()
+    {
+        List<Tour> tour =  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email");
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
+
+            }
+            return tour;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
     public List<Tour> ObtenerTourPorProvincia(String provincia)
     {
         List<Tour> tour =  new ArrayList<>();
