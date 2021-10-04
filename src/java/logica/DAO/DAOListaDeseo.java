@@ -49,7 +49,7 @@ public class DAOListaDeseo extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email inner join cr_trips.Lista_deseo as ls on t.Codigo = ls.Tour  where ls.Usuario = ? ");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email inner join cr_trips.Lista_deseo as ls on t.Codigo = ls.Tour  where ls.Usuario = ? ");
             pst.clearParameters();
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
@@ -58,6 +58,27 @@ public class DAOListaDeseo extends Conexion{
 
             }
             return tours;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+      public List<ListaDeseo> ObtenerListaDeseoPorTour(int codigo)
+    {
+        List<ListaDeseo> usuarios =  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select t.nombre,u.email,u.nombre as nom,u.apellidos from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email inner join cr_trips.Lista_deseo as ls on t.Codigo = ls.Tour  where t.Codigo = ? ");
+            pst.clearParameters();
+            pst.setInt(1, codigo);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                usuarios.add(DibujarUsuariosListaDeseo(rs.getString("email"),rs.getString("nom"),rs.getString("Apellidos"),rs.getString("Nombre")));
+
+            }
+            return usuarios;
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
@@ -72,5 +93,19 @@ public class DAOListaDeseo extends Conexion{
         user.setNombre(nom);
         tour.setUsuario(user);
         return tour;
+    }
+      public ListaDeseo DibujarUsuariosListaDeseo(String email, String nom,String apellidos,String tour )
+    {   
+
+        Usuario user = new Usuario();
+        ListaDeseo ld = new ListaDeseo();
+        user.setEmail(email);
+        user.setNombre(nom);
+        user.setApellidos(apellidos);
+        Tour tour1 =new Tour();
+        tour1.setNombre(tour);
+        ld.setTour(tour1);
+        ld.setUsuario(user);
+        return ld;
     }
 }

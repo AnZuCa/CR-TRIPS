@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import logica.modelo.Conexion;
+import logica.modelo.MailSender;
 import logica.modelo.Salida;
 import logica.modelo.Tour;
 import logica.modelo.TourReserva;
@@ -26,6 +27,7 @@ import logica.modelo.TourReservaSalida;
 public class DAOTourReserva extends Conexion{
     public boolean RegistrarTourReserva(TourReserva tourreserva)
     {
+        MailSender mailsender = new MailSender();
         ConvertidorFechaSQL convert = new ConvertidorFechaSQL();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -41,6 +43,8 @@ public class DAOTourReserva extends Conexion{
                 return false;
 
             }
+            DAOListaDeseo ls = new DAOListaDeseo();
+            mailsender.sendEmailUsuariosListaDeseo(ls.ObtenerListaDeseoPorTour(tourreserva.getTour().getCodigo()), tourreserva.getFechasalida());
             return true;
         } catch (SQLException e) {
             System.err.println("Error" + e);

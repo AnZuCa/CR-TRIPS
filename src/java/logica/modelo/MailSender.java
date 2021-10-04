@@ -6,6 +6,8 @@
 package logica.modelo;
 
 import java.net.PasswordAuthentication;
+import java.util.Date;
+import java.util.List;
 import javax.mail.Session;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -35,8 +37,7 @@ public class MailSender {
         return Session.getDefaultInstance(properties);
     }
     public  void sendEmailReserva(Usuario user, Reserva reserva) {
-        String destinario="";
-        String asunto="";
+        String asunto="Reserva CR-TRIPS";
         String mensaje="<h1>Buenas"+user.getNombre()+" "+user.getApellidos()+".</h1><br>"
                 +"<p>Le informamos que la reservación con código "+reserva.getCodigo()+" fue exitosa.</p><br><br>"+
                 "Detalles de la reservación:</p><br>Nombre del tour:"+reserva.getTourreserva().getTour().getNombre()+"<br>"
@@ -49,7 +50,7 @@ public class MailSender {
         MimeMessage mail = new MimeMessage(GetSession());
         try{
             mail.setFrom(new InternetAddress(correo));
-            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinario));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
             mail.setSubject(asunto);
             mail.setContent(mensaje,"text/html");
             Transport transporte = GetSession().getTransport("smtp");
@@ -66,21 +67,39 @@ public class MailSender {
             System.out.println(ex.toString());
         }
     }
-
-    public static Message prepareMessage(Session session, String myAccountEmail, String recepient) {
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("Reservacion en GetYourTour");
-            String htmlCode="<h1>Reservacion realizada</h1> <br/> <h2>Esperamos que disfrute sus tours</h2>";
-            message.setContent(htmlCode, "text/html");
-            return message;
-        } catch (Exception ex) {
+    public  void sendEmailUsuariosListaDeseo(List<ListaDeseo> users, Date salida) {
+        for(ListaDeseo ls: users)
+        {
+                    String asunto="";
+        String mensaje="<h1>Buenas"+ls.getUsuario().getNombre()+" "+ls.getUsuario().getApellidos()+".</h1><br>"
+                +"<p>Le informamos que tenemos una nueva excursión a "+ls.getTour().getNombre()+" el día"+salida.toString()+"</p><br><br>"+
+                "No deje ir esta oportunidad, esperamos verlos en este nuevo viaje por los rincones de Costa Rica!";
+        
+        MimeMessage mail = new MimeMessage(GetSession());
+        try{
+            mail.setFrom(new InternetAddress(correo));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(ls.getUsuario().getEmail()));
+            mail.setSubject(asunto);
+            mail.setContent(mensaje,"text/html");
+            Transport transporte = GetSession().getTransport("smtp");
+            transporte.connect(correo,password);
+            transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+            transporte.close();
+        
+        }
+        catch (AddressException ex)
+        {
+          System.out.println(ex.toString());
+        }
+        catch (MessagingException ex){
             System.out.println(ex.toString());
         }
-        return null;
+        
+        
+        }
+
     }
+
 
     
 }
