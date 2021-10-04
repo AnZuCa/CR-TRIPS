@@ -64,6 +64,28 @@ public class DAOTourReservaSalida extends Conexion{
         }
         return null;
     }
+    public TourReservaSalida ObtenerTourReservaSalida(int tour_reserva,int codigo_salida)
+    {
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select s.Codigo, s.Lugar, s.Fecha_hora from cr_trips.Tour_reserva_salida as trs inner join cr_trips.Salida as s on trs.Salida = s.Codigo where trs.Tour_reserva = ? and trs.Salida = ? ");
+            pst.clearParameters();
+            pst.setInt(1, tour_reserva);
+            pst.setInt(2, codigo_salida);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return DibujarTourReservaSalida(rs.getInt("Codigo"), rs.getString("Lugar"), rs.getDate("Fecha_hora"));
+
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
     public TourReservaSalida DibujarTourReservaSalida(int codigo, String lugar,Date fecha)
     {
         Salida s = new Salida(codigo,lugar,fecha);

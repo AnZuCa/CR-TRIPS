@@ -68,7 +68,7 @@ public class Reserva implements Serializable {
     @JoinColumn(name = "Usuario", referencedColumnName = "Email")
     @ManyToOne(optional = false)
     private Usuario usuario;
-
+    private TourReservaSalida tour_reserva_salida;
     
     
     public Reserva() {
@@ -86,7 +86,15 @@ public class Reserva implements Serializable {
         this.fecha = fecha;
     }
 
+    public TourReservaSalida getTour_reserva_salida() {
+        return tour_reserva_salida;
+    }
 
+    public void setTour_reserva_salida(TourReservaSalida tour_reserva_salida) {
+        this.tour_reserva_salida = tour_reserva_salida;
+    }
+
+   
 
     public Integer getCodigo() {
         return codigo;

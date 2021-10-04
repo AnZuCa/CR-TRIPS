@@ -34,10 +34,17 @@ public class MailSender {
         properties.put("mail.smtp.port", "587");
         return Session.getDefaultInstance(properties);
     }
-    public  void sendEmailReserva(Usuario user) {
+    public  void sendEmailReserva(Usuario user, Reserva reserva) {
         String destinario="";
         String asunto="";
-        String mensaje="";
+        String mensaje="<h1>Buenas"+user.getNombre()+" "+user.getApellidos()+".</h1><br>"
+                +"<p>Le informamos que la reservación con código "+reserva.getCodigo()+" fue exitosa.</p><br><br>"+
+                "Detalles de la reservación:</p><br>Nombre del tour:"+reserva.getTourreserva().getTour().getNombre()+"<br>"
+                +"<p>Punto de salida:"+reserva.getTour_reserva_salida().getSalida().getLugar()+"</p><br>"+
+                "<p>Hora de salida:"+reserva.getTour_reserva_salida().getSalida().getFechahora().toString()+"</p><br>"+
+                "<p>Cantidad de Asientos:"+reserva.getCantidadtickets()+"</p><br>"+
+                "<p>Hora de salida:"+reserva.getTotal()+"</p><br><br>"+
+                "Muchas gracias por confiar en nosotros para sus vacaciones!<br>En caso de alguna duda escribir a:"+reserva.getTourreserva().getTour().getEmpresa().getEmail();
         
         MimeMessage mail = new MimeMessage(GetSession());
         try{

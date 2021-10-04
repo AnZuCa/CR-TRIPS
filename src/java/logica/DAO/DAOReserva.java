@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import logica.modelo.Conexion;
+import logica.modelo.MailSender;
 import logica.modelo.Reserva;
 import logica.modelo.TourReserva;
 import logica.modelo.Usuario;
@@ -32,19 +33,22 @@ public class DAOReserva extends Conexion{
             int asientosdisponibles=ObtenerCantidadAsientosDisponiblesTour(reserva.getTourreserva().getCodigo());
             if (reserva.getCantidadtickets()<=asientosdisponibles)
             {
-                pst = getConexion().prepareStatement("insert into cr_trips.Reserva(Total, Cantidad_tickets, Tipo_pago,Usuario, Fecha, Tour_reserva) values(?,?,?,?,?,?) ");
+                pst = getConexion().prepareStatement("insert into cr_trips.Reserva(Total, Cantidad_tickets, Tipo_pago,Usuario, Fecha,Tour_reserva_salida, Tour_reserva) values(?,?,?,?,?,?,?) ");
                 pst.clearParameters();
                 pst.setDouble(1, reserva.getTotal());
                 pst.setInt(2, reserva.getCantidadtickets());
                 pst.setInt(3, reserva.getTipopago());
                 pst.setString(4, reserva.getUsuario().getEmail());
                 pst.setDate(5, java.sql.Date.valueOf(timeStamp));
-                pst.setInt(6, reserva.getTourreserva().getCodigo());
+                pst.setInt(6,reserva.getTour_reserva_salida().getSalida().getCodigo());
+                pst.setInt(7, reserva.getTourreserva().getCodigo());
                 if (pst.executeUpdate() != 1) {
                     return false;
 
                 }
                 ActualizarCantidadAsientosTour(reserva.getTourreserva().getCodigo(),asientosdisponibles-reserva.getCantidadtickets());
+                MailSender ms = new MailSender();
+                ms.sendEmailReserva(reserva.getUsuario(), ObtenerUltimaReserva(reserva.getUsuario().getEmail()));
                 return true;
             }
             
@@ -106,7 +110,7 @@ public class DAOReserva extends Conexion{
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
             if (rs.next()) {
-                reservas.add(DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva")));
+                reservas.add(DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva_salida"),rs.getInt("Tour_reserva")));
 
             }
             return reservas;
@@ -127,7 +131,7 @@ public class DAOReserva extends Conexion{
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
             if (rs.next()) {
-                reservas.add(DibujarReserva2(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva")));
+                reservas.add(DibujarReserva2(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva_salida"),rs.getInt("Tour_reserva")));
 
             }
             return reservas;
@@ -148,7 +152,7 @@ public class DAOReserva extends Conexion{
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
             if (rs.next()) {
-                return DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva"));
+                return DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva_salida"),rs.getInt("Tour_reserva"));
 
             }
 
@@ -157,19 +161,19 @@ public class DAOReserva extends Conexion{
         }
         return null;
     }
-    public Reserva ObtenergMiReserva(int codigo)
+    public Reserva ObtenerUltimaReserva(String correo)
     {
 
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select * from cr_trips.Reserva where Codigo = ? ");
+            pst = getConexion().prepareStatement("select * from cr_trips.Reserva where Codigo = (select MAX(Codigo) from cr_trips.Reserva where Usuario = ?) ");
             pst.clearParameters();
-            pst.setInt(1, codigo);
+            pst.setString(1, correo);
             rs = pst.executeQuery();
             if (rs.next()) {
-                return DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva"));
+                return DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva_salida"),rs.getInt("Tour_reserva"));
 
             }
 
@@ -178,22 +182,26 @@ public class DAOReserva extends Conexion{
         }
         return null;
     }
-    public Reserva DibujarReserva2(int codigo, double total, int cantidad_tickets, int tipo_pago,String usuario, Date fecha, int tour_reserva)
+    public Reserva DibujarReserva2(int codigo, double total, int cantidad_tickets, int tipo_pago,String usuario, Date fecha,int tour_reserva_salida, int tour_reserva)
     {
     
         DAOTourReserva tr=new DAOTourReserva();
+        DAOTourReservaSalida trs = new DAOTourReservaSalida();
         DAOUsuario u=new DAOUsuario();
         Reserva r = new Reserva(codigo,total,cantidad_tickets, tipo_pago,fecha);
         r.setTourreserva(tr.ObtenerTourReservaPorCodigo(tour_reserva));
         r.setUsuario(u.ObtenerUsuarioReserva(usuario));
+        r.setTour_reserva_salida(trs.ObtenerTourReservaSalida(tour_reserva, tour_reserva_salida));
         return r;
     }
-    public Reserva DibujarReserva(int codigo, double total, int cantidad_tickets, int tipo_pago,String usuario, Date fecha, int tour_reserva)
+    public Reserva DibujarReserva(int codigo, double total, int cantidad_tickets, int tipo_pago,String usuario, Date fecha,int tour_reserva_salida, int tour_reserva)
     {
     
         DAOTourReserva tr=new DAOTourReserva();
+        DAOTourReservaSalida trs = new DAOTourReservaSalida();
         Reserva r = new Reserva(codigo,total,cantidad_tickets, tipo_pago,fecha);
         r.setTourreserva(tr.ObtenerTourReservaPorCodigo(tour_reserva));
+        r.setTour_reserva_salida(trs.ObtenerTourReservaSalida(tour_reserva, tour_reserva_salida));
         return r;
     }
 }
