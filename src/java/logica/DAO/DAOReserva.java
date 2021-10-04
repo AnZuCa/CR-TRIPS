@@ -157,6 +157,27 @@ public class DAOReserva extends Conexion{
         }
         return null;
     }
+    public Reserva ObtenergMiReserva(int codigo)
+    {
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select * from cr_trips.Reserva where Codigo = ? ");
+            pst.clearParameters();
+            pst.setInt(1, codigo);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva"));
+
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
     public Reserva DibujarReserva2(int codigo, double total, int cantidad_tickets, int tipo_pago,String usuario, Date fecha, int tour_reserva)
     {
     
