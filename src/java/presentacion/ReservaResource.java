@@ -53,7 +53,10 @@ public class ReservaResource {
         HttpSession session = request.getSession(true);
         Usuario user = (Usuario) session.getAttribute("usuario");
         String json = new Gson().toJson(Model.instance().ObtenerMisReservas(user));
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     
     }
     @GET
@@ -61,7 +64,10 @@ public class ReservaResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getReservasPorTour(@QueryParam("codigo") int codigotourreserva) {
         String json = new Gson().toJson(Model.instance().ObtenerReservasPorTour(codigotourreserva));
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     
     }
     @GET
@@ -69,7 +75,10 @@ public class ReservaResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getMiReserva(@QueryParam("codigo") int codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerMiReserva(codigo));
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     
     }
     @POST
@@ -84,9 +93,15 @@ public class ReservaResource {
         if (flag == true)
         {
             String json = new Gson().toJson("Registro correcto");
-            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+            return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
         }
-        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar la reserva").build();
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar la reserva").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     
     }
 }

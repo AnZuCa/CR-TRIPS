@@ -46,7 +46,10 @@ public class ComentarioResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getCometarioPorTour(@QueryParam("codigo") int codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerComentariosPorTour(codigo));
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     }
     @POST
     @Path("/Registrar")
@@ -60,9 +63,15 @@ public class ComentarioResource {
         if (flag == true)
         {
             String json = new Gson().toJson(Model.instance().ObtenerComentariosPorTour(comentario.getTour().getCodigo()));
-            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+            return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
         }
-        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el comentario").build();
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el comentario").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     
     }
 }

@@ -47,7 +47,10 @@ public class CategoriaResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getCategoria(@QueryParam("codigo") Integer codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerCategoriaPorId(codigo));
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*") .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     
     }
     @GET
@@ -55,7 +58,10 @@ public class CategoriaResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getCategorias() {
         String json = new Gson().toJson(Model.instance().ObtenerCategorias());
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*") .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
+                        .header("Access-Control-Allow-Credentials", "true") 
+                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .header("Access-Control-Max-Age", "1209600").build();
     
     }
     /**
