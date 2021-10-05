@@ -46,10 +46,7 @@ public class TourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getTours() {
         String json = new Gson().toJson(Model.instance().ObtenerTours());
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
@@ -57,10 +54,7 @@ public class TourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getToursPorCategoria(@QueryParam("codigo") Integer codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerToursPorCategoria(codigo));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
@@ -68,10 +62,7 @@ public class TourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getToursPorCanton(@QueryParam("canton") String canton) {
         String json = new Gson().toJson(Model.instance().ObtenerToursPorCanton(canton));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
@@ -79,10 +70,7 @@ public class TourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getToursPorFechaSalida(@QueryParam("fecha") String fecha) {
         String json = new Gson().toJson(Model.instance().ObtenerToursPorFechaSalida(fecha));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
@@ -90,10 +78,7 @@ public class TourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getToursPorProvincia(@QueryParam("provincia") String provincia) {
         String json = new Gson().toJson(Model.instance().ObtenerToursPorProvincia(provincia));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
@@ -101,20 +86,14 @@ public class TourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getToursPorEmpresa(@QueryParam("empresa") String empresa) {
         String json = new Gson().toJson(Model.instance().ObtenerToursPorEmpresa(empresa));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getTour(@QueryParam("codigo") int codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerTour(codigo));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
     @POST
     @Path("/Registrar")
@@ -128,15 +107,9 @@ public class TourResource {
         if (flag == true)
         {
             String json = new Gson().toJson("Se registró correctamente el tour");
-            return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
-        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el tour").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el tour").build();
     
     }
 }

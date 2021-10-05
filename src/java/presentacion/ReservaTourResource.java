@@ -50,25 +50,16 @@ public class ReservaTourResource {
         if (flag == true)
         {
             String json = new Gson().toJson("Registro correcto");
-            return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
-        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar").build();
     
     }
     @GET
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getReservaTours(@QueryParam("tour") Integer tour) {
         String json = new Gson().toJson(Model.instance().ObtenerToursReserva(tour));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
@@ -78,10 +69,7 @@ public class ReservaTourResource {
         HttpSession session = request.getSession(true);
         Usuario user = (Usuario) session.getAttribute("usuario");
         String json = new Gson().toJson(Model.instance().ObtenerToursReservaPorEmpresa(user.getEmail()));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
     @GET
@@ -89,10 +77,7 @@ public class ReservaTourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getReservaTour(@QueryParam("codigo") int codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerTourReservaPorCodigo(codigo));
-        return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
 }
