@@ -97,10 +97,15 @@ public class UsuarioResource {
                 session.setAttribute("usuario", u);
                 String json = new Gson().toJson(u);
                
-                return Response.ok(json, MediaType.APPLICATION_JSON).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization") 
-                        .header("Access-Control-Allow-Credentials", "true") 
-                        .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                        .header("Access-Control-Max-Age", "1209600").build();
+                return Response.ok(json, MediaType.APPLICATION_JSON).status(200)
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Credentials", "true")
+                        .header("Access-Control-Allow-Headers",
+                        "origin, content-type, accept, authorization")
+                        .header("Access-Control-Allow-Methods", 
+                        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .entity("")
+                        .build();
                      
             } else {
                 throw new NotFoundException();

@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(presentacion.CORSFilter.class);
         resources.add(presentacion.CategoriaResource.class);
         resources.add(presentacion.ComentarioResource.class);
         resources.add(presentacion.IncluyeResource.class);
