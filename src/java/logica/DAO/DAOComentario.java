@@ -51,7 +51,7 @@ public class DAOComentario extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select u.Email,u.Nombre,u.Apellidos,c.Codigo,c.Descripción,c.Estrellas,c.Fecha from cr_trips.Comentario as c inner join cr_trips.Usuario as u on c.Usuario = u.Email where c.Codigo = ? ");
+            pst = getConexion().prepareStatement("select u.Email,u.Nombre,u.Apellidos,c.Codigo,c.Descripcion,c.Estrellas,c.Fecha from cr_trips.Comentario as c inner join cr_trips.Usuario as u on c.Usuario = u.Email where c.Codigo = ? ");
             pst.clearParameters();
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
