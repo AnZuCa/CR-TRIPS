@@ -30,11 +30,11 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion desCategoria,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as desCategoria,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email");
             pst.clearParameters();
             rs = pst.executeQuery();
             if (rs.next()) {
-                tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("desCategoria"),rs.getString("email"),rs.getString("nombre")));
+                tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("desCategoria"),rs.getString("email"),rs.getString("nom")));
 
             }
             return tour;
@@ -50,7 +50,7 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.provincia = ? ");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.provincia = ? ");
             pst.clearParameters();
             pst.setString(1, provincia);
             rs = pst.executeQuery();
@@ -71,7 +71,7 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.Canton = ? ");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.Canton = ? ");
             pst.clearParameters();
             pst.setString(1, canton);
             rs = pst.executeQuery();
@@ -93,7 +93,7 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.Categoria = ? ");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.Categoria = ? ");
             pst.clearParameters();
             pst.setInt(1, categoria);
             rs = pst.executeQuery();
@@ -133,7 +133,7 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.Empresa = ? ");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.Empresa = ? ");
             pst.clearParameters();
             pst.setString(1, email_empresa);
             rs = pst.executeQuery();
@@ -156,7 +156,7 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on t.Codigo = tr.Tour inner join cr_trips.Categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where tr.Fecha_salida = ?");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on t.Codigo = tr.Tour inner join cr_trips.Categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where tr.Fecha_salida = ?");
             pst.clearParameters();
             pst.setDate(1, convert.Convertidor(fecha1));
             rs = pst.executeQuery();
@@ -177,7 +177,7 @@ public class DAOTour extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion,u.email,u.nombre from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.codigo = ?");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where t.codigo = ?");
             pst.clearParameters();
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
