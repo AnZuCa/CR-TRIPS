@@ -17,7 +17,7 @@ import logica.DAO.ConvertidorFechaSQL;
 import logica.modelo.Usuario;
 /**
  *
- * @author hp
+ * @author Andrés
  */
 public class DAOComentario extends Conexion{
     public boolean RegistrarComentarioTour(Comentario comentario)
