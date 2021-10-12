@@ -56,7 +56,7 @@ public class DAOComentario extends Conexion{
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
             if (rs.next()) {
-                comentarios.add(DibujarComentario(rs.getString("Email"),rs.getString("Nombre"),rs.getString("Apellidos"),rs.getInt("Coidgo"),rs.getString("Descripción"),rs.getInt("Estrellas"),rs.getDate("Fecha")));
+                comentarios.add(DibujarComentario(rs.getString("Email"),rs.getString("Nombre"),rs.getString("Apellidos"),rs.getInt("Codigo"),rs.getString("Descripcion"),rs.getInt("Estrellas"),rs.getDate("Fecha")));
 
             }
             return comentarios;
