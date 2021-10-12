@@ -1,0 +1,412 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema CR_TRIPS
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema CR_TRIPS
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `CR_TRIPS` DEFAULT CHARACTER SET utf8 ;
+USE `CR_TRIPS` ;
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Usuario` (
+  `Email` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(15) NOT NULL,
+  `Apellidos` VARCHAR(40) NOT NULL,
+  `FecNacimiento` VARCHAR(15) NOT NULL,
+  `Tipo_usuario` INT NOT NULL,
+  `Password` VARCHAR(45) NOT NULL,
+  `Subscripcion` VARCHAR(45) NULL,
+  PRIMARY KEY (`Email`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Categoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Categoria` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Descripcion` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`Codigo`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Tour`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Tour` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  `Foto` VARCHAR(100) NOT NULL,
+  `Provincia` VARCHAR(45) NOT NULL,
+  `Canton` VARCHAR(45) NOT NULL,
+  `Categoria` INT NOT NULL,
+  `Empresa` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Tour_Categoria1_idx` (`Categoria` ASC) VISIBLE,
+  INDEX `fk_Tour_Usuario1_idx` (`Empresa` ASC) VISIBLE,
+  CONSTRAINT `fk_Tour_Categoria1`
+    FOREIGN KEY (`Categoria`)
+    REFERENCES `CR_TRIPS`.`Categoria` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Tour_Usuario1`
+    FOREIGN KEY (`Empresa`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Tipo_Ticket`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Tipo_Ticket` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Empresa` VARCHAR(45) NOT NULL,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Ticket_Usuario_idx` (`Empresa` ASC) VISIBLE,
+  CONSTRAINT `fk_Ticket_Usuario`
+    FOREIGN KEY (`Empresa`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Ticket_tour`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Ticket_tour` (
+  `Precio` DOUBLE NOT NULL,
+  `Tipo_Ticket` INT NOT NULL,
+  `Tour` INT NOT NULL,
+  PRIMARY KEY (`Tipo_Ticket`, `Tour`),
+  INDEX `fk_Ticket_tour_Tipo_Ticket1_idx` (`Tipo_Ticket` ASC) VISIBLE,
+  INDEX `fk_Ticket_tour_Tour1_idx` (`Tour` ASC) VISIBLE,
+  CONSTRAINT `fk_Ticket_tour_Tipo_Ticket1`
+    FOREIGN KEY (`Tipo_Ticket`)
+    REFERENCES `CR_TRIPS`.`Tipo_Ticket` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Ticket_tour_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Recomendacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Recomendacion` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Descripcion` VARCHAR(50) NOT NULL,
+  `Empresa` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Recomendacion_Usuario1_idx` (`Empresa` ASC) VISIBLE,
+  CONSTRAINT `fk_Recomendacion_Usuario1`
+    FOREIGN KEY (`Empresa`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Incluye`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Incluye` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  `Empresa` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Incluye_Usuario1_idx` (`Empresa` ASC) VISIBLE,
+  CONSTRAINT `fk_Incluye_Usuario1`
+    FOREIGN KEY (`Empresa`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Recomendacion_tour`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Recomendacion_tour` (
+  `Recomendacion` INT NOT NULL,
+  `Tour` INT NOT NULL,
+  INDEX `fk_table1_Recomendacion1_idx` (`Recomendacion` ASC) VISIBLE,
+  PRIMARY KEY (`Recomendacion`, `Tour`),
+  INDEX `fk_Recomendacion_tour_Tour1_idx` (`Tour` ASC) VISIBLE,
+  CONSTRAINT `fk_table1_Recomendacion1`
+    FOREIGN KEY (`Recomendacion`)
+    REFERENCES `CR_TRIPS`.`Recomendacion` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Recomendacion_tour_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Incluye_tour`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Incluye_tour` (
+  `Incluye` INT NOT NULL,
+  `Tour` INT NOT NULL,
+  INDEX `fk_Incluye_tour_Incluye1_idx` (`Incluye` ASC) VISIBLE,
+  PRIMARY KEY (`Incluye`, `Tour`),
+  INDEX `fk_Incluye_tour_Tour1_idx` (`Tour` ASC) VISIBLE,
+  CONSTRAINT `fk_Incluye_tour_Incluye1`
+    FOREIGN KEY (`Incluye`)
+    REFERENCES `CR_TRIPS`.`Incluye` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Incluye_tour_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Tour_reserva`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Tour_reserva` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Tour` INT NOT NULL,
+  `Fecha_salida` DATE NOT NULL,
+  `Fecha_llegada` DATE NOT NULL,
+  `Cantidad_tickets` INT NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Tour_reserva_Tour1_idx` (`Tour` ASC) VISIBLE,
+  CONSTRAINT `fk_Tour_reserva_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Salida`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Salida` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Lugar` VARCHAR(45) NOT NULL,
+  `Fecha_hora` DATETIME NOT NULL,
+  PRIMARY KEY (`Codigo`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Comentario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Comentario` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Descripcion` VARCHAR(150) NOT NULL,
+  `Estrellas` INT NOT NULL,
+  `Tour` INT NOT NULL,
+  `Usuario` VARCHAR(45) NOT NULL,
+  `Fecha` DATE NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Comentario_Tour1_idx` (`Tour` ASC) VISIBLE,
+  INDEX `fk_Comentario_Usuario1_idx` (`Usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_Comentario_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Comentario_Usuario1`
+    FOREIGN KEY (`Usuario`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Tarjeta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Tarjeta` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Numero` VARCHAR(45) NOT NULL,
+  `MMYYY` VARCHAR(5) NOT NULL,
+  `CVC` INT NOT NULL,
+  `Usuario` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Tarjeta_Usuario1_idx` (`Usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_Tarjeta_Usuario1`
+    FOREIGN KEY (`Usuario`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Tour_reserva_salida`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Tour_reserva_salida` (
+  `Salida` INT NOT NULL,
+  `Tour_reserva` INT NOT NULL,
+  INDEX `fk_Tour_reserva_salida_Salida1_idx` (`Salida` ASC) VISIBLE,
+  INDEX `fk_Tour_reserva_salida_Tour_reserva1_idx` (`Tour_reserva` ASC) VISIBLE,
+  PRIMARY KEY (`Salida`, `Tour_reserva`),
+  CONSTRAINT `fk_Tour_reserva_salida_Salida1`
+    FOREIGN KEY (`Salida`)
+    REFERENCES `CR_TRIPS`.`Salida` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Tour_reserva_salida_Tour_reserva1`
+    FOREIGN KEY (`Tour_reserva`)
+    REFERENCES `CR_TRIPS`.`Tour_reserva` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Reserva`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Reserva` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Total` DOUBLE NOT NULL,
+  `Cantidad_tickets` INT NOT NULL,
+  `Tipo_pago` INT NOT NULL,
+  `Usuario` VARCHAR(45) NOT NULL,
+  `Fecha` DATE NOT NULL,
+  `Tour_reserva_salida` INT NOT NULL,
+  `Tour_reserva` INT NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Reserva_Usuario1_idx` (`Usuario` ASC) VISIBLE,
+  INDEX `fk_Reserva_Tour_reserva_salida1_idx` (`Tour_reserva_salida` ASC, `Tour_reserva` ASC) VISIBLE,
+  CONSTRAINT `fk_Reserva_Usuario1`
+    FOREIGN KEY (`Usuario`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Reserva_Tour_reserva_salida1`
+    FOREIGN KEY (`Tour_reserva_salida` , `Tour_reserva`)
+    REFERENCES `CR_TRIPS`.`Tour_reserva_salida` (`Salida` , `Tour_reserva`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Telefono`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Telefono` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Numero` INT NOT NULL,
+  `Usuario` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Telefono_Usuario1_idx` (`Usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_Telefono_Usuario1`
+    FOREIGN KEY (`Usuario`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Foto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Foto` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Url` VARCHAR(500) NOT NULL,
+  `Tour` INT NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Foto_Tour1_idx` (`Tour` ASC) VISIBLE,
+  CONSTRAINT `fk_Foto_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Pregunta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Pregunta` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Usuario` VARCHAR(45) NOT NULL,
+  `Tour` INT NOT NULL,
+  `Descripcion` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Pregunta_Usuario1_idx` (`Usuario` ASC) VISIBLE,
+  INDEX `fk_Pregunta_Tour1_idx` (`Tour` ASC) VISIBLE,
+  CONSTRAINT `fk_Pregunta_Usuario1`
+    FOREIGN KEY (`Usuario`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Pregunta_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Respuesta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Respuesta` (
+  `Codigo` INT NOT NULL AUTO_INCREMENT,
+  `Pregunta` INT NOT NULL,
+  `Descripcion` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  INDEX `fk_Respuesta_Pregunta1_idx` (`Pregunta` ASC) VISIBLE,
+  CONSTRAINT `fk_Respuesta_Pregunta1`
+    FOREIGN KEY (`Pregunta`)
+    REFERENCES `CR_TRIPS`.`Pregunta` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CR_TRIPS`.`Lista_deseo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CR_TRIPS`.`Lista_deseo` (
+  `Usuario` VARCHAR(45) NOT NULL,
+  `Tour` INT NOT NULL,
+  INDEX `fk_Lista_deseo_Usuario1_idx` (`Usuario` ASC) VISIBLE,
+  INDEX `fk_Lista_deseo_Tour1_idx` (`Tour` ASC) VISIBLE,
+  PRIMARY KEY (`Usuario`, `Tour`),
+  CONSTRAINT `fk_Lista_deseo_Usuario1`
+    FOREIGN KEY (`Usuario`)
+    REFERENCES `CR_TRIPS`.`Usuario` (`Email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Lista_deseo_Tour1`
+    FOREIGN KEY (`Tour`)
+    REFERENCES `CR_TRIPS`.`Tour` (`Codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

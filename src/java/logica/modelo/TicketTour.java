@@ -42,9 +42,9 @@ public class TicketTour implements Serializable {
     @JoinColumn(name = "Tipo_Ticket", referencedColumnName = "Codigo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TipoTicket tipoTicket1;
-    @JoinColumn(name = "Tour_reserva", referencedColumnName = "Codigo", insertable = false, updatable = false)
+    @JoinColumn(name = "Tour", referencedColumnName = "Codigo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private TourReserva tourReserva;
+    private Tour tour;
 
     public TicketTour() {
     }
@@ -86,12 +86,12 @@ public class TicketTour implements Serializable {
         this.tipoTicket1 = tipoTicket1;
     }
 
-    public TourReserva getTourReserva() {
-        return tourReserva;
+    public Tour getTour() {
+        return tour;
     }
 
-    public void setTourReserva(TourReserva tourReserva) {
-        this.tourReserva = tourReserva;
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 
     @Override

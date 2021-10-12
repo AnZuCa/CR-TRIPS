@@ -136,14 +136,14 @@ public class DAOTourReserva extends Conexion{
     public TourReserva DibujarTourReserva(int codigo, int tour,Date fecha_salida,Date fecha_llegada,int cantidad)
     {
         DAOTourReservaSalida trs = new DAOTourReservaSalida();
-        DAOTicketTour tt = new DAOTicketTour();
+
         DAOTour daotour = new DAOTour();
         DAOFoto daofoto = new DAOFoto();
         TourReserva tr = new TourReserva(codigo,fecha_salida,fecha_llegada,cantidad);
         Tour tour1 = daotour.ObtenerTour(tour);
         tour1.setFotoList(daofoto.ObtenerFotosPorTour(tour));
         tr.setTour(tour1);
-        tr.setTicketTourList(tt.ObtenerTicketsTour(tour));
+
         tr.setTourreservasalidalist(trs.ObtenerTourReservaSalidas(tour));
         return tr;
     }

@@ -65,8 +65,6 @@ public class TourReserva implements Serializable {
     private int cantidadtickets;
     @ManyToMany(mappedBy = "tourReservaList")
     private List<Salida> salidaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tourReserva")
-    private List<TicketTour> ticketTourList;
     @JoinColumn(name = "Tour", referencedColumnName = "Codigo")
     @ManyToOne(optional = false)
     private Tour tour;
@@ -138,14 +136,7 @@ public class TourReserva implements Serializable {
         this.salidaList = salidaList;
     }
 
-    @XmlTransient
-    public List<TicketTour> getTicketTourList() {
-        return ticketTourList;
-    }
-
-    public void setTicketTourList(List<TicketTour> ticketTourList) {
-        this.ticketTourList = ticketTourList;
-    }
+   
 
     public Tour getTour() {
         return tour;

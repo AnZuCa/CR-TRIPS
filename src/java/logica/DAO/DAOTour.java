@@ -219,12 +219,20 @@ public class DAOTour extends Conexion{
     }
     public Tour DibujarTour(Integer codigo, String nombre,String descripcion, String foto,String provincia,String canton,Integer categoria,String des, String email, String nom )
     {   
+        DAOTicketTour tt = new DAOTicketTour();
+        DAORecomendacion r = new DAORecomendacion();
+        DAOComentario c = new DAOComentario();
+        DAOIncluye i = new DAOIncluye();
         Tour tour = new Tour(codigo,nombre,descripcion,foto,provincia,canton);
         tour.setCategoria(new Categoria(categoria,des));
         Usuario user = new Usuario();
         user.setEmail(email);
         user.setNombre(nom);
         tour.setUsuario(user);
+        tour.setTicketTourList(tt.ObtenerTicketsTour(codigo));
+        tour.setRecomendacionList(r.ObtenerRecomendacionesPorTour(codigo));
+        tour.setComentarioList(c.ObtenerComentariosPorTour(codigo));
+        
         return tour;
     }
     

@@ -111,12 +111,15 @@ public class Model {
             for(Recomendacion r: tour.getRecomendacionList()){
                 daorecomendacion.RegistrarRecomendacionTour(codigo, tour.getUsuario().getEmail());
             }
+            tour.setCodigo(codigo);
+            for(TicketTour t: tour.getTicketTourList()){
+                t.setTour(tour);
+                daotickettour.RegistrarTicketTour(t);
+            }
             for(Incluye i: tour.getIncluyeList()){
                 daoincluye.RegistrarIncluyeTour(codigo, tour.getUsuario().getEmail());
             }
             for(Foto f: tour.getFotoList()){
-                Tour tour1 = new Tour();
-                tour1.setCodigo(codigo);
                 f.setTour(tour);
                 daofoto.RegistrarFoto(f);
             }
@@ -133,10 +136,7 @@ public class Model {
             int codigo = daotourreserva.ObtenerUltimoTourReservaRegistrado(tourreserva.getTour().getCodigo());
             TourReserva tr = new TourReserva();
             tr.setCodigo(codigo);
-            for(TicketTour t: tourreserva.getTicketTourList()){
-                t.setTourReserva(tourreserva);
-                daotickettour.RegistrarTicketTour(t);
-            }
+            
             for(TourReservaSalida trs: tourreserva.getTourreservasalidalist()){
                 trs.setTourreserva(tr);
                 daotourreservasalida.RegistrarTourRservaSalida(trs);
