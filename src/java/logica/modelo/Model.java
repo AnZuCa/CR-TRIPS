@@ -156,6 +156,10 @@ public class Model {
        return tour;
        
    }
+   public List<TourReserva> ObtenerToursReservaFiltro(String nombreTour,String fechaSalida,String fechaLlegada,int CantidadTickes)
+    {
+        return daotourreserva.BuscarToursFiltro(nombreTour,CantidadTickes,fechaSalida,fechaLlegada);
+    }
     public List<Incluye> ObtenerIncluyesPorTour(int codigotour)
     {
         return daoincluye.ObtenerIncluyesPorTour(codigotour);
@@ -231,5 +235,17 @@ public class Model {
     public Usuario Login(Usuario user)
     {
         return daousuario.ObtenerUsuario(user);
+    }
+    
+    
+     public static void main(String[] args){
+        Conexion con= new Conexion();
+        
+        Model modelo = new Model();
+        
+        
+         System.out.println(modelo.ObtenerToursReservaFiltro("Manuel Antonio", "2021-01-01", "2021-02-01", 4));
+        
+ 
     }
 }

@@ -112,4 +112,13 @@ public class TourResource {
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el tour").build();
     
     }
+    
+    @GET
+    @Path("/BuscarTours")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getBuscarTours(@QueryParam("nombreTour") String nombreTour,@QueryParam("fechaSalida") String fechaSalida,@QueryParam("fechaLlegada") String fechaLlegada,@QueryParam("CantidadTickes") int CantidadTickes) {
+        String json = new Gson().toJson(Model.instance().ObtenerToursReservaFiltro(nombreTour,fechaSalida,fechaLlegada,CantidadTickes));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    
+    }
 }

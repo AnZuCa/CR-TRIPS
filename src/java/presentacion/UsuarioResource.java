@@ -23,8 +23,6 @@ import javax.ws.rs.core.Response;
 import logica.modelo.Model;
 import logica.modelo.Usuario;
 
-
-
 /**
  * REST Web Service
  *
@@ -74,6 +72,8 @@ public class UsuarioResource {
     }
     @POST
     @Path("/Login")
+    
+
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response login(Usuario user) {
