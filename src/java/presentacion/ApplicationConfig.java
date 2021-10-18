@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(presentacion.CORSFilter.class);
         resources.add(presentacion.CategoriaResource.class);
         resources.add(presentacion.ComentarioResource.class);
+        resources.add(presentacion.FotoResource.class);
         resources.add(presentacion.IncluyeResource.class);
         resources.add(presentacion.ListaDeseoResource.class);
         resources.add(presentacion.RecomendacionResource.class);
@@ -40,7 +41,9 @@ public class ApplicationConfig extends Application {
         resources.add(presentacion.ReservaTourResource.class);
         resources.add(presentacion.TarjetaResource.class);
         resources.add(presentacion.TelefonoResource.class);
+        resources.add(presentacion.TicketTourResource.class);
         resources.add(presentacion.TipoTicketResource.class);
+        resources.add(presentacion.TourReservaSalidaResource.class);
         resources.add(presentacion.TourResource.class);
         resources.add(presentacion.UsuarioResource.class);
     }

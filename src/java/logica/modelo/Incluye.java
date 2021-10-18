@@ -49,11 +49,7 @@ public class Incluye implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
-    @JoinTable(name = "incluye_tour", joinColumns = {
-        @JoinColumn(name = "Incluye", referencedColumnName = "Codigo")}, inverseJoinColumns = {
-        @JoinColumn(name = "Tour", referencedColumnName = "Codigo")})
-    @ManyToMany
-    private List<Tour> tourList;
+
     @JoinColumn(name = "Empresa", referencedColumnName = "Email")
     @ManyToOne(optional = false)
     private Usuario empresa;
@@ -86,14 +82,7 @@ public class Incluye implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public List<Tour> getTourList() {
-        return tourList;
-    }
 
-    public void setTourList(List<Tour> tourList) {
-        this.tourList = tourList;
-    }
 
     public Usuario getEmpresa() {
         return empresa;

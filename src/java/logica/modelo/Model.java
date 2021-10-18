@@ -104,48 +104,40 @@ public class Model {
     }
     public boolean RegistrarTour(Tour tour)
     {
-        boolean flag = daotour.RegistrarTour(tour);
-        if (flag ==true)
-        {
-            int codigo = daotour.ObtenerUltimoTourRegistrado(tour.getUsuario().getEmail());
-            for(Recomendacion r: tour.getRecomendacionList()){
-                daorecomendacion.RegistrarRecomendacionTour(codigo, tour.getCodigo());
-            }
-            tour.setCodigo(codigo);
-            for(TicketTour t: tour.getTicketTourList()){
-                t.setTour(tour);
-                daotickettour.RegistrarTicketTour(t);
-            }
-            for(Incluye i: tour.getIncluyeList()){
-                daoincluye.RegistrarIncluyeTour(codigo, tour.getCodigo());
-            }
-            for(Foto f: tour.getFotoList()){
-                f.setTour(tour);
-                daofoto.RegistrarFoto(f);
-            }
-            return true;
-        }
-        return false;
-   
+        return daotour.RegistrarTour(tour);
+
     }
-     public boolean RegistrarRservaTour(TourReserva tourreserva)
+    public boolean RegistrarFotoTour(Foto f)
     {
-        boolean flag = daotourreserva.RegistrarTourReserva(tourreserva);
-        if (flag ==true)
-        {
-            int codigo = daotourreserva.ObtenerUltimoTourReservaRegistrado(tourreserva.getTour().getCodigo());
-            TourReserva tr = new TourReserva();
-            tr.setCodigo(codigo);
-            
-            for(TourReservaSalida trs: tourreserva.getTourreservasalidalist()){
-                trs.setTourreserva(tr);
-                daotourreservasalida.RegistrarTourRservaSalida(trs);
-            }
-            return true;
-        }
-        return false;
-   
+        f.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(f.getTour().getEmpresa().getEmail()));
+        return daofoto.RegistrarFoto(f);
     }
+    public boolean RegistrarTicketTour(TicketTour t)
+    {
+        t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));
+        return daotickettour.RegistrarTicketTour(t);
+    }
+    public boolean RegistrarIncluyeTour(IncluyeTour i)
+    {
+        int codigo = daotour.ObtenerUltimoTourRegistrado(i.getTour().getEmpresa().getEmail());
+        return daoincluye.RegistrarIncluyeTour(i.getIncluye().getCodigo(), codigo);
+    }
+    public boolean RegistrarRecomendacionTour(RecomendacionTour r)
+    {
+        int codigo = daotour.ObtenerUltimoTourRegistrado(r.getTour().getEmpresa().getEmail());
+        return daorecomendacion.RegistrarRecomendacionTour(r.getRecomendacion().getCodigo(), codigo);
+    }
+     public boolean RegistrarReservaTour(TourReserva tourreserva)
+    {
+        return daotourreserva.RegistrarTourReserva(tourreserva);
+
+    }
+    public boolean RegistrarTourReservaSalida(TourReservaSalida trs)
+    {
+        trs.getTourreserva().setCodigo(daotourreserva.ObtenerUltimoTourReservaRegistrado(trs.getTourreserva().getTour().getCodigo()));
+        return daotourreservasalida.RegistrarTourRservaSalida(trs);
+    } 
+    
     
    public Tour ObtenerTour(int codigo)
    {

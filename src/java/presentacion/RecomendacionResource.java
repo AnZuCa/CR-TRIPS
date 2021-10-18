@@ -22,6 +22,7 @@ import logica.modelo.Model;
 
 import javax.servlet.http.HttpServletRequest;
 import logica.modelo.Recomendacion;
+import logica.modelo.RecomendacionTour;
 import logica.modelo.Usuario;
 
 
@@ -70,7 +71,21 @@ public class RecomendacionResource {
     
     }
     
-
+    @POST
+    @Path("/RegistrarRecomendacionTour")
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response RegistrarRecomendacionTour(RecomendacionTour rt) {
+        
+        boolean flag = Model.instance().RegistrarRecomendacionTour(rt);
+        if (flag == true)
+        {
+            String json = new Gson().toJson("Registro correcto de Recomendacion Tour");
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el recomendacion tour").build();
+    
+    }
     /**
      * PUT method for updating or creating an instance of RecomendacionResource
      * @param content representation for the resource

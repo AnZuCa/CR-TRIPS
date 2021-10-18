@@ -46,7 +46,7 @@ public class ReservaTourResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarReservaTour(TourReserva rt) {
-        boolean flag = Model.instance().RegistrarRservaTour(rt) ;
+        boolean flag = Model.instance().RegistrarReservaTour(rt) ;
         if (flag == true)
         {
             String json = new Gson().toJson("Registro correcto");

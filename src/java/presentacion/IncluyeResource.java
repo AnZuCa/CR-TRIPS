@@ -19,6 +19,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import logica.modelo.Incluye;
+import logica.modelo.IncluyeTour;
 import logica.modelo.Model;
 import logica.modelo.Usuario;
 
@@ -60,6 +61,22 @@ public class IncluyeResource {
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el incluye").build();
+    
+    }
+    
+    @POST
+    @Path("/RegistrarIncluyeTour")
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response RegistrarIncluyeTour(IncluyeTour it) {
+        
+        boolean flag = Model.instance().RegistrarIncluyeTour(it);
+        if (flag == true)
+        {
+            String json = new Gson().toJson("Registro correcto de Incluye Tour");
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el incluye tour").build();
     
     }
 }
