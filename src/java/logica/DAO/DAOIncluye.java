@@ -82,7 +82,7 @@ public class DAOIncluye extends Conexion{
         }
         return false;
     }
-    public boolean RegistrarIncluyeTour(int incluye,String tour)
+    public boolean RegistrarIncluyeTour(int incluye,int tour)
     {
         
         PreparedStatement pst = null;
@@ -92,7 +92,7 @@ public class DAOIncluye extends Conexion{
             pst = getConexion().prepareStatement("insert into cr_trips.Incluye_tour values(?,?) ");
             pst.clearParameters();
             pst.setInt(1, incluye);
-            pst.setString(2, tour);
+            pst.setInt(2, tour);
             if (pst.executeUpdate() != 1) {
                 return false;
 

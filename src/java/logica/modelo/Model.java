@@ -117,7 +117,7 @@ public class Model {
                 daotickettour.RegistrarTicketTour(t);
             }
             for(Incluye i: tour.getIncluyeList()){
-                daoincluye.RegistrarIncluyeTour(codigo, tour.getUsuario().getEmail());
+                daoincluye.RegistrarIncluyeTour(codigo, tour.getCodigo());
             }
             for(Foto f: tour.getFotoList()){
                 f.setTour(tour);
