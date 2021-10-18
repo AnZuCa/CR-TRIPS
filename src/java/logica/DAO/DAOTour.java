@@ -206,7 +206,7 @@ public class DAOTour extends Conexion{
             pst.setString(4, tour.getProvincia());
             pst.setString(5, tour.getCanton());
             pst.setInt(6, tour.getCategoria().getCodigo());
-            pst.setString(7, tour.getUsuario().getEmail());
+            pst.setString(7, tour.getEmpresa().getEmail());
             if (pst.executeUpdate() != 1) {
                 return false;
 
