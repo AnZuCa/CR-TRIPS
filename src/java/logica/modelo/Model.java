@@ -109,7 +109,7 @@ public class Model {
         {
             int codigo = daotour.ObtenerUltimoTourRegistrado(tour.getUsuario().getEmail());
             for(Recomendacion r: tour.getRecomendacionList()){
-                daorecomendacion.RegistrarRecomendacionTour(codigo, tour.getUsuario().getEmail());
+                daorecomendacion.RegistrarRecomendacionTour(codigo, tour.getCodigo());
             }
             tour.setCodigo(codigo);
             for(TicketTour t: tour.getTicketTourList()){

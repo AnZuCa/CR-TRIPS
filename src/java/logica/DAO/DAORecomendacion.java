@@ -82,7 +82,7 @@ public class DAORecomendacion extends Conexion {
         }
         return false;
     }
-    public boolean RegistrarRecomendacionTour(int incluye,String tour)
+    public boolean RegistrarRecomendacionTour(int incluye,int tour)
     {
         
         PreparedStatement pst = null;
@@ -92,7 +92,7 @@ public class DAORecomendacion extends Conexion {
             pst = getConexion().prepareStatement("insert into cr_trips.Recomendacion_tour values(?,?) ");
             pst.clearParameters();
             pst.setInt(1, incluye);
-            pst.setString(2, tour);
+            pst.setInt(2, tour);
             if (pst.executeUpdate() != 1) {
                 return false;
 
