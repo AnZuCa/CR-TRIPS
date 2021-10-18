@@ -53,9 +53,7 @@ public class ComentarioResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarComentario(Comentario comentario) {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        comentario.setUsuario(user);
+        //Llevan usuario dentro del objeto
         boolean flag = Model.instance().RegistrarComentario(comentario);
         if (flag == true)
         {

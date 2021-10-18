@@ -16,6 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import logica.modelo.ListaDeseo;
@@ -46,9 +47,9 @@ public class ListaDeseoResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getListaDeseo() {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
+    public Response getListaDeseo(@QueryParam("correo") String correo) {
+        Usuario user = new Usuario();
+        user.setEmail(correo);
         String json = new Gson().toJson(Model.instance().ObtenerListaDeseo(user));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
@@ -58,9 +59,7 @@ public class ListaDeseoResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarTourDeseo(ListaDeseo tourdeseo) {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        tourdeseo.setUsuario(user);
+        //Llleva usuario el objeto
         boolean flag = Model.instance().RegistrarTourListaDeseo(tourdeseo) ;
         if (flag == true)
         {

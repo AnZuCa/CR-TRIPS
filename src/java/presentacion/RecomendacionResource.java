@@ -49,10 +49,8 @@ public class RecomendacionResource {
      */
     @GET
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response getRecomendacionesPorEmpresa() {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        String json = new Gson().toJson(Model.instance().ObtenerRecomendacionesPorEmpresa(user.getEmail()));
+    public Response getRecomendacionesPorEmpresa(@QueryParam("correo") String correo) {
+        String json = new Gson().toJson(Model.instance().ObtenerRecomendacionesPorEmpresa(correo));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
@@ -61,12 +59,11 @@ public class RecomendacionResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarRecomendacion(Recomendacion recomendacion) {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        boolean flag = Model.instance().RegistrarRecomendacion(recomendacion, user);
+        //Llleva usuario el objeto
+        boolean flag = Model.instance().RegistrarRecomendacion(recomendacion, recomendacion.getEmpresa());
         if (flag == true)
         {
-            String json = new Gson().toJson(Model.instance().ObtenerRecomendacionesPorEmpresa(user.getEmail()));
+            String json = new Gson().toJson(Model.instance().ObtenerRecomendacionesPorEmpresa(recomendacion.getEmpresa().getEmail()));
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar la recomendación").build();

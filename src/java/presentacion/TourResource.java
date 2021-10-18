@@ -100,9 +100,7 @@ public class TourResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarTour(Tour tour) {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        tour.setUsuario(user);
+        //Lleva usuario el objeto
         boolean flag = Model.instance().RegistrarTour(tour);
         if (flag == true)
         {

@@ -15,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import logica.modelo.Model;
@@ -45,9 +46,9 @@ public class TelefonoResource {
      */
     @GET
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response getTelefonosPorUsuario() {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
+    public Response getTelefonosPorUsuario(@QueryParam("correo") String correo) {
+        Usuario user = new Usuario();
+        user.setEmail(correo);
         String json = new Gson().toJson(Model.instance().ObtenerTelefonos(user));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
@@ -57,13 +58,11 @@ public class TelefonoResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarTelefono(Telefono telefono) {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        telefono.setUsuario(user);
+        //Lleva usuario el objeto
         boolean flag = Model.instance().RegistrarTelefono(telefono);
         if (flag == true)
         {
-            String json = new Gson().toJson(Model.instance().ObtenerTelefonos(user));
+            String json = new Gson().toJson(Model.instance().ObtenerTelefonos(telefono.getUsuario()));
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el telefono").build();

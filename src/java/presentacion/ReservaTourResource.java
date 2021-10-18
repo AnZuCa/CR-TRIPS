@@ -65,10 +65,8 @@ public class ReservaTourResource {
     @GET
     @Path("/Empresa")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response getReservaToursPorEmpresa() {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        String json = new Gson().toJson(Model.instance().ObtenerToursReservaPorEmpresa(user.getEmail()));
+    public Response getReservaToursPorEmpresa(@QueryParam("correo") String correo) {
+        String json = new Gson().toJson(Model.instance().ObtenerToursReservaPorEmpresa(correo));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }

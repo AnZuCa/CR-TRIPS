@@ -49,9 +49,9 @@ public class ReservaResource {
     @GET
     @Path("/MisReservas")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response getMisReservas() {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
+    public Response getMisReservas(@QueryParam("correo") String correo) {
+        Usuario user = new Usuario();
+        user.setEmail(correo);
         String json = new Gson().toJson(Model.instance().ObtenerMisReservas(user));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
@@ -77,9 +77,7 @@ public class ReservaResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarReserva(Reserva r) {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        r.setUsuario(user);
+        //Lleva usuario el objeto
         boolean flag = Model.instance().RegistrarReserva(r) ;
         if (flag == true)
         {

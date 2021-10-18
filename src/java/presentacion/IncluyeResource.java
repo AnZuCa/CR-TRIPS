@@ -52,12 +52,11 @@ public class IncluyeResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarIncluye(Incluye incluye) {
-        HttpSession session = request.getSession(true);
-        Usuario user = (Usuario) session.getAttribute("usuario");
-        boolean flag = Model.instance().RegistrarIncluye(incluye, user);
+        //Lleva usuario dentro del objeto
+        boolean flag = Model.instance().RegistrarIncluye(incluye, incluye.getEmpresa());
         if (flag == true)
         {
-            String json = new Gson().toJson(Model.instance().ObtenerIncluyesPorEmpresa(user.getEmail()));
+            String json = new Gson().toJson(Model.instance().ObtenerIncluyesPorEmpresa(incluye.getEmpresa().getEmail()));
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el incluye").build();
