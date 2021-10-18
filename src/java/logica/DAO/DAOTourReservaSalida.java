@@ -54,7 +54,7 @@ public class DAOTourReservaSalida extends Conexion{
             pst.clearParameters();
             pst.setInt(1, tour_reserva);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tourreservasalida.add(DibujarTourReservaSalida(rs.getInt("Codigo"), rs.getString("Lugar"), rs.getDate("Fecha_hora")));
 
             }

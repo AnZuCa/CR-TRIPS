@@ -54,7 +54,7 @@ public class DAOTipoTicket extends Conexion{
             pst.clearParameters();
             pst.setString(1, emailempresa);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tipotickets.add(DibujarTipoTicket(rs.getInt("Codigo"),rs.getString("Empresa"),rs.getString("Descripcion")));
 
             }

@@ -30,7 +30,7 @@ public class DAOTelefono extends Conexion{
             pst.clearParameters();
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 telefonos.add(DibujarTelefono(rs.getInt("Codigo"),rs.getInt("Numero")));
 
             }

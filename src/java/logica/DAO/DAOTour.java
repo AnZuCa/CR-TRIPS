@@ -33,7 +33,7 @@ public class DAOTour extends Conexion{
             pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as desCategoria,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email");
             pst.clearParameters();
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("desCategoria"),rs.getString("email"),rs.getString("nom")));
 
             }
@@ -54,7 +54,7 @@ public class DAOTour extends Conexion{
             pst.clearParameters();
             pst.setString(1, provincia);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
 
             }
@@ -75,7 +75,7 @@ public class DAOTour extends Conexion{
             pst.clearParameters();
             pst.setString(1, canton);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
 
             }
@@ -97,7 +97,7 @@ public class DAOTour extends Conexion{
             pst.clearParameters();
             pst.setInt(1, categoria);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while(rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
 
             }
@@ -137,7 +137,7 @@ public class DAOTour extends Conexion{
             pst.clearParameters();
             pst.setString(1, email_empresa);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while(rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
 
             }
@@ -160,7 +160,7 @@ public class DAOTour extends Conexion{
             pst.clearParameters();
             pst.setDate(1, convert.Convertidor(fecha1));
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
 
             }

@@ -30,7 +30,7 @@ public class DAOIncluye extends Conexion{
             pst.clearParameters();
             pst.setInt(1, codigotour);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 incluyes.add(DibujarIncluye(rs.getInt("Codigo"),rs.getString("Descripcion")));
 
             }
@@ -51,7 +51,7 @@ public class DAOIncluye extends Conexion{
             pst.clearParameters();
             pst.setString(1, emailempresa);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 incluyes.add(DibujarIncluye(rs.getInt("Codigo"),rs.getString("Descripcion")));
 
             }

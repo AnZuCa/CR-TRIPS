@@ -48,7 +48,7 @@ public class DAOCategoria extends Conexion{
             pst = getConexion().prepareStatement("Select * from cr_trips.Categoria");
             pst.clearParameters();
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 categorias.add(DibujarCategoria(rs.getInt("Codigo"),rs.getString("Descripcion")));
 
             }

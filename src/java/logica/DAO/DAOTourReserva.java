@@ -81,7 +81,7 @@ public class DAOTourReserva extends Conexion{
             pst.clearParameters();
             pst.setInt(1, tour);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tourreserva.add(DibujarTourReserva(rs.getInt("Codigo"), rs.getInt("Tour"), rs.getDate("Fecha_salida"),rs.getDate("Fecha_llegada"),rs.getInt("Cantidad_tickets")));
 
             }
@@ -110,7 +110,7 @@ public class DAOTourReserva extends Conexion{
             pst.setInt(3, canTickes);
             pst.setString(4, NombreTour);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tourreserva.add(DibujarTourReserva(rs.getInt("Codigo"), rs.getInt("Tour"), rs.getDate("Fecha_salida"),rs.getDate("Fecha_llegada"),rs.getInt("Cantidad_tickets")));
             }
             return tourreserva;
@@ -132,7 +132,7 @@ public class DAOTourReserva extends Conexion{
             pst.clearParameters();
             pst.setString(1, empresa);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while(rs.next()) {
                 tourreserva.add(DibujarTourReserva(rs.getInt("Codigo"), rs.getInt("Tour"), rs.getDate("Fecha_salida"),rs.getDate("Fecha_llegada"),rs.getInt("Cantidad_tickets")));
 
             }

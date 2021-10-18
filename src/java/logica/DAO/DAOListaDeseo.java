@@ -53,7 +53,7 @@ public class DAOListaDeseo extends Conexion{
             pst.clearParameters();
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tours.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
 
             }
@@ -74,7 +74,7 @@ public class DAOListaDeseo extends Conexion{
             pst.clearParameters();
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 usuarios.add(DibujarUsuariosListaDeseo(rs.getString("email"),rs.getString("nom"),rs.getString("Apellidos"),rs.getString("Nombre")));
 
             }

@@ -30,7 +30,7 @@ public class DAORecomendacion extends Conexion {
             pst.clearParameters();
             pst.setInt(1, codigotour);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 categorias.add(DibujarRecomendacion(rs.getInt("Codigo"),rs.getString("Descripcion")));
 
             }
@@ -51,7 +51,7 @@ public class DAORecomendacion extends Conexion {
             pst.clearParameters();
             pst.setString(1, emailempresa);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 recomendaciones.add(DibujarRecomendacion(rs.getInt("Codigo"),rs.getString("Descripcion")));
 
             }

@@ -53,7 +53,7 @@ public class DAOTicketTour extends Conexion{
             pst.clearParameters();
             pst.setInt(1, tour);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 ticketstour.add(DibujarTicketTour(rs.getInt("Codigo"), rs.getString("Descripcion"), rs.getDouble("Precio")));
 
             }

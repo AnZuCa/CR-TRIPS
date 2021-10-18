@@ -30,7 +30,7 @@ public class DAOTarjeta extends Conexion{
             pst.clearParameters();
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 tarjetas.add(DibujarTarjeta(rs.getInt("Codigo"), rs.getString("Numero"),rs.getString("MMYYY"),rs.getInt("CVC")));
 
             }

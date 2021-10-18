@@ -52,7 +52,7 @@ public class DAOFoto extends Conexion{
             pst.clearParameters();
             pst.setInt(1, tour);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 fotos.add(DibujarFoto(rs.getInt("Codigo"),rs.getString("Url")));
 
             }

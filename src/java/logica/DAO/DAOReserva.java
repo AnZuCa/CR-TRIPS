@@ -109,7 +109,7 @@ public class DAOReserva extends Conexion{
             pst.clearParameters();
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 reservas.add(DibujarReserva(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva_salida"),rs.getInt("Tour_reserva")));
 
             }
@@ -130,7 +130,7 @@ public class DAOReserva extends Conexion{
             pst.clearParameters();
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 reservas.add(DibujarReserva2(rs.getInt("Codigo"), rs.getDouble("Total"),rs.getInt("Cantidad_tickets"),rs.getInt("Tipo_pago"),rs.getString("Usuario"), rs.getDate("Fecha"),rs.getInt("Tour_reserva_salida"),rs.getInt("Tour_reserva")));
 
             }
