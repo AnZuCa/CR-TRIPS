@@ -102,7 +102,7 @@ public class Model {
     {
         return daotelefono.ObtenerTelefonos(user);
     }
-    public boolean RegistrarTour(Tour tour)
+    public Tour RegistrarTour(Tour tour)
     {
         return daotour.RegistrarTour(tour);
 

@@ -101,10 +101,10 @@ public class TourResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarTour(Tour tour) {
         //Lleva usuario el objeto
-        boolean flag = Model.instance().RegistrarTour(tour);
-        if (flag == true)
+        Tour ultimoTour = Model.instance().RegistrarTour(tour);
+        if (ultimoTour != null)
         {
-            String json = new Gson().toJson("Se registró correctamente el tour");
+            String json = new Gson().toJson(ultimoTour);
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el tour").build();

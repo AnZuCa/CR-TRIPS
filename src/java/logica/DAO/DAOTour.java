@@ -191,7 +191,28 @@ public class DAOTour extends Conexion{
         }
         return null;
     }
-    public boolean RegistrarTour(Tour tour)
+     public Tour ObtenerUltimoTour()
+    {
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.tour as t inner join cr_trips.categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  order by 1 desc limit 1");
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                Tour tour = new Tour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"));
+                return tour;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+    
+    public Tour RegistrarTour(Tour tour)
     {
         
         PreparedStatement pst = null;
@@ -208,14 +229,17 @@ public class DAOTour extends Conexion{
             pst.setInt(6, tour.getCategoria().getCodigo());
             pst.setString(7, tour.getEmpresa().getEmail());
             if (pst.executeUpdate() != 1) {
-                return false;
+                return null;
 
             }
-            return true;
+            
+            Tour ultimoTour = ObtenerUltimoTour();
+          
+            return ultimoTour;
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
-        return false;
+        return null;
     }
     public Tour DibujarTour(Integer codigo, String nombre,String descripcion, String foto,String provincia,String canton,Integer categoria,String des, String email, String nom )
     {   
