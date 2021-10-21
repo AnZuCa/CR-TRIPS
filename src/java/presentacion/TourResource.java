@@ -89,12 +89,13 @@ public class TourResource {
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
-    @GET
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response getTour(@QueryParam("codigo") int codigo) {
-        String json = new Gson().toJson(Model.instance().ObtenerTour(codigo));
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
-    }
+        @GET
+        @Path("/Codigo")
+        @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+        public Response getTour(@QueryParam("codigoTour") int codigo) {
+            String json = new Gson().toJson(Model.instance().ObtenerTour(codigo));
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
     @POST
     @Path("/Registrar")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
@@ -115,6 +116,7 @@ public class TourResource {
     @Path("/BuscarTours")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getBuscarTours(@QueryParam("nombreTour") String nombreTour,@QueryParam("fechaSalida") String fechaSalida,@QueryParam("fechaLlegada") String fechaLlegada,@QueryParam("CantidadTickes") int CantidadTickes) {
+        String prueba = "";
         String json = new Gson().toJson(Model.instance().ObtenerToursReservaFiltro(nombreTour,fechaSalida,fechaLlegada,CantidadTickes));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     

@@ -14,6 +14,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import logica.modelo.Foto;
@@ -41,7 +42,7 @@ public class FotoResource {
     @Path("/Registrar")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response RegistrarFotoTour(Foto foto) {
+        public Response RegistrarFotoTour(Foto foto) {
     
         boolean flag = Model.instance().RegistrarFotoTour(foto);
         if (flag == true)
@@ -51,5 +52,13 @@ public class FotoResource {
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar la foto tour").build();
     
+    }
+    
+    @GET
+    @Path("/getFotos")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getFotos(@QueryParam("codigo") int codigo) {
+        String json = new Gson().toJson(Model.instance().ObtenerFotosPorTour(codigo));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
 }

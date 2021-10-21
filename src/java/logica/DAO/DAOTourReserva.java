@@ -100,10 +100,7 @@ public class DAOTourReserva extends Conexion{
         try {
 
             pst = getConexion().prepareStatement(
-                    "select tr.Codigo,tr.Tour,tr.Fecha_salida, tr.Fecha_llegada,tr.Cantidad_tickets \n" +
-                    "from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on tr.Tour=t.Codigo \n" +
-                    "where tr.Fecha_salida = ? and tr.Fecha_llegada = ? \n" +
-                    "and tr.Cantidad_tickets = ? and t.Nombre = ?");
+                    "select tr.Codigo,tr.Tour,tr.Fecha_salida, tr.Fecha_llegada,tr.Cantidad_tickets from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on tr.Tour=t.Codigo where tr.Fecha_salida = ? and tr.Fecha_llegada = ? and tr.Cantidad_tickets = ? and t.Nombre = ?");
             pst.clearParameters();
             pst.setString(1, FechaSalida);
             pst.setString(2, FechaLlegada);
