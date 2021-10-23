@@ -57,10 +57,10 @@ public class TipoTicketResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarTipoTicket(TipoTicket tt) {
         //Lleva usuario el objeto
-        boolean flag = Model.instance().RegistrarTipoTicket(tt);
-        if (flag == true)
+        TipoTicket tipoTicket = Model.instance().RegistrarTipoTicket(tt);
+        if (tipoTicket != null)
         {
-            String json = new Gson().toJson(Model.instance().ObtenerTipoTicket(tt.getEmpresa()));
+            String json = new Gson().toJson(tipoTicket);
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el Tipo de tiquete").build();

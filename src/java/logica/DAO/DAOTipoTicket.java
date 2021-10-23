@@ -21,7 +21,7 @@ import logica.modelo.Usuario;
  * @author hp
  */
 public class DAOTipoTicket extends Conexion{
-    public boolean RegistrarTipo_ticket(TipoTicket tt)
+    public TipoTicket RegistrarTipo_ticket(TipoTicket tt)
     {
         
         PreparedStatement pst = null;
@@ -34,14 +34,14 @@ public class DAOTipoTicket extends Conexion{
             pst.setString(2, tt.getDescripcion());
 
             if (pst.executeUpdate() != 1) {
-                return false;
+                return null;
 
             }
-            return true;
+            return this.ObtenerUltimoTipoTicket();
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
-        return false;
+        return null;
     }
       public List<TipoTicket> ObtenerTipoTicketPorEmpresa(String emailempresa)
     {
@@ -59,6 +59,25 @@ public class DAOTipoTicket extends Conexion{
 
             }
             return tipotickets;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+      
+      
+    public TipoTicket ObtenerUltimoTipoTicket()
+    {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select * from cr_trips.Tipo_Ticket order by Codigo desc limit 1");
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return DibujarTipoTicket(rs.getInt("Codigo"),rs.getString("Empresa"),rs.getString("Descripcion"));
+            }
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }

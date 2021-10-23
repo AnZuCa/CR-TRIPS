@@ -114,7 +114,7 @@ public class Model {
     }
     public boolean RegistrarTicketTour(TicketTour t)
     {
-        t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));
+        //t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));
         return daotickettour.RegistrarTicketTour(t);
     }
     public boolean RegistrarIncluyeTour(IncluyeTour i)
@@ -188,7 +188,7 @@ public class Model {
     {
         return daolistadeseo.ObtenerListaDeseo(user);
     }
-    public boolean RegistrarTipoTicket(TipoTicket tipoticket)
+    public TipoTicket RegistrarTipoTicket(TipoTicket tipoticket)
     {
         return daotipoticket.RegistrarTipo_ticket(tipoticket);
     }
