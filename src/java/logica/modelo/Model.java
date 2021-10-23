@@ -94,9 +94,9 @@ public class Model {
     {
          return daotour.ObtenerTours();
     }
-    public List<Tour> ObtenerToursPorFechaSalida(String fecha)
+    public List<Tour> ObtenerToursPorFechaSalida(String fecha1,String fecha2)
     {
-         return daotour.ObtenerTourPorFechaSalida(fecha);
+         return daotour.ObtenerTourPorFechaSalida(fecha1,fecha2);
     }
     public List<Telefono> ObtenerTelefonos(Usuario user)
     {

@@ -147,18 +147,20 @@ public class DAOTour extends Conexion{
         }
         return null;
     }
-    public List<Tour> ObtenerTourPorFechaSalida(String fecha)
+    public List<Tour> ObtenerTourPorFechaSalida(String fecha2,String fecha3)
     {
-        Date fecha1 = new Date(fecha);
+        Date fecha1 = new Date(fecha2);
+        Date fecha4 = new Date(fecha3);
         ConvertidorFechaSQL convert = new ConvertidorFechaSQL();
         List<Tour> tour =  new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on t.Codigo = tr.Tour inner join cr_trips.Categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where tr.Fecha_salida = ?");
+            pst = getConexion().prepareStatement("select t.Codigo,t.Nombre,t.Descripcion,t.foto,t.provincia,t.canton,t.categoria,c.descripcion as des,u.email,u.nombre as nom from cr_trips.Tour_reserva as tr inner join cr_trips.Tour as t on t.Codigo = tr.Tour inner join cr_trips.Categoria as c on t.Categoria = c.Codigo inner join cr_trips.Usuario as u on t.Empresa = u.email  where tr.Fecha_salida >= ? and tr.Fecha_salida <= ?");
             pst.clearParameters();
             pst.setDate(1, convert.Convertidor(fecha1));
+            pst.setDate(2, convert.Convertidor(fecha4));
             rs = pst.executeQuery();
             while (rs.next()) {
                 tour.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));

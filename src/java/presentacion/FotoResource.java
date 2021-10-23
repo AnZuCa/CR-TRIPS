@@ -17,9 +17,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import logica.DAO.DAOReporte;
 import logica.modelo.Foto;
 import logica.modelo.Incluye;
 import logica.modelo.Model;
+
 
 /**
  * REST Web Service
@@ -37,6 +39,18 @@ public class FotoResource {
      */
     public FotoResource() {
     }
+    
+    @GET
+    @Path("/getFotoss")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getFossstos() {
+        DAOReporte daore = new DAOReporte();
+        byte[] bytes=daore.ReporteUsuarios();
+         String nomeRelatorio= "aaaaa" + ".pdf";
+        return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
+}
+    
+    
 
     @POST
     @Path("/Registrar")
