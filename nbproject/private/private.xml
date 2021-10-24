@@ -7,15 +7,20 @@
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTour.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/FotoResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOUsuario.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOReporte.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/ReservasPorFecha.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/CategoriaResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/GananciaPorTour.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTourReserva.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTelefono.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTipoTicket.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Model.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/ReservasPorTour.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TourResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOFoto.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Pregunta.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOReserva.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Recomendacion.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TourReserva.java</file>
         </group>
