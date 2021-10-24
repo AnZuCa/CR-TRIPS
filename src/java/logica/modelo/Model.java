@@ -112,6 +112,12 @@ public class Model {
         f.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(f.getTour().getEmpresa().getEmail()));
         return daofoto.RegistrarFoto(f);
     }
+   
+     public List<TicketTour> ObtenerTicketCodigoTour(int tour)
+    {
+        return daotickettour.ObtenerTicketsTour(tour);
+    }
+     
     public boolean RegistrarTicketTour(TicketTour t)
     {
         //t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));

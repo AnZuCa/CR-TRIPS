@@ -30,11 +30,11 @@ public class DAOTicketTour extends Conexion{
             pst = getConexion().prepareStatement("insert into cr_trips.Ticket_tour values(?,?,?) ");
             pst.clearParameters();
             pst.setDouble(1, tickettour.getPrecio());
-            pst.setInt(3, tickettour.getTour().getCodigo());
-            pst.setInt(2, tickettour.getTipoTicket1().getCodigo());
+            pst.setInt(2, tickettour.getTour().getCodigo());
+            pst.setInt(3, tickettour.getTipoTicket().getCodigo());
+
             if (pst.executeUpdate() != 1) {
                 return false;
-
             }
             return true;
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class DAOTicketTour extends Conexion{
         TipoTicket tt = new TipoTicket(codigo,descripcion);
         TicketTour tit = new TicketTour();
         tit.setPrecio(precio);
-        tit.setTipoTicket1(tt);
+        tit.setTipoTicket(tt);
         return tit;
     }
 }

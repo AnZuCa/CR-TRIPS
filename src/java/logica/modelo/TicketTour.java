@@ -41,7 +41,7 @@ public class TicketTour implements Serializable {
     private double precio;
     @JoinColumn(name = "Tipo_Ticket", referencedColumnName = "Codigo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private TipoTicket tipoTicket1;
+    private TipoTicket tipoTicket;
     @JoinColumn(name = "Tour", referencedColumnName = "Codigo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Tour tour;
@@ -78,12 +78,12 @@ public class TicketTour implements Serializable {
         this.precio = precio;
     }
 
-    public TipoTicket getTipoTicket1() {
-        return tipoTicket1;
+    public TipoTicket getTipoTicket() {
+        return tipoTicket;
     }
 
-    public void setTipoTicket1(TipoTicket tipoTicket1) {
-        this.tipoTicket1 = tipoTicket1;
+    public void setTipoTicket(TipoTicket tipoTicket) {
+        this.tipoTicket = tipoTicket;
     }
 
     public Tour getTour() {
