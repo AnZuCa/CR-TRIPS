@@ -57,6 +57,37 @@ public class ReservaResource {
     
     }
     @GET
+    @Path("/GananciaDeTour")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getGananciaDeTour(@QueryParam("tour_reserva") int tour_reserva) {
+        String json = new Gson().toJson(Model.instance().ObtenerGananciaDeTour(tour_reserva));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    //Función para dashboard de reportes
+    @GET
+    @Path("/GananciasPorTours")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getGananciasPorTour(@QueryParam("correo") String correo) {
+        String json = new Gson().toJson(Model.instance().ObtenerGananciaPorTour(correo));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    //Función para dashboard de reportes
+    @GET
+    @Path("/CantidadReservasPorTour")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getCantidadReservasPorTour(@QueryParam("correo") String correo) {
+        String json = new Gson().toJson(Model.instance().ObtenerCantidadReservasPorTour(correo));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    //Función para dashboard de reportes
+    @GET
+    @Path("/CantidadReservasPorFecha")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getCantidadReservasPorFecha(@QueryParam("correo") String correo) {
+        String json = new Gson().toJson(Model.instance().ObtenerCantidadReservasPorFecha(correo));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    @GET
     @Path("/Reservas")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getReservasPorTour(@QueryParam("codigo") int codigotourreserva) {

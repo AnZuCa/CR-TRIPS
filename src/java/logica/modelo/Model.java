@@ -214,6 +214,22 @@ public class Model {
     {
         return daoreserva.ObtenerReservas(codigo);
     }
+    public List<GananciaPorTour> ObtenerGananciaPorTour(String empresa)
+    {
+        return daoreserva.GananciasPorTour(empresa);
+    }
+    public Double ObtenerGananciaDeTour(int tour_reserva)
+    {
+        return daoreserva.GananciaDeTour(tour_reserva);
+    }
+    public List<ReservasPorTour> ObtenerCantidadReservasPorTour(String empresa)
+    {
+        return daoreserva.ReservasPorTour(empresa);
+    }
+    public List<ReservasPorFecha> ObtenerCantidadReservasPorFecha(String empresa)
+    {
+        return daoreserva.ReservasPorFecha(empresa);
+    }
     public Reserva ObtenerMiReserva(int codigo)
     {
         return daoreserva.ObtenerMiReserva(codigo);

@@ -14,8 +14,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import logica.modelo.Conexion;
+import logica.modelo.GananciaPorTour;
 import logica.modelo.MailSender;
 import logica.modelo.Reserva;
+import logica.modelo.ReservasPorFecha;
+import logica.modelo.ReservasPorTour;
 import logica.modelo.TourReserva;
 import logica.modelo.Usuario;
 
@@ -140,6 +143,95 @@ public class DAOReserva extends Conexion{
         }
         return null;
     }
+    //Función para dashboard de reporteria
+    public List<ReservasPorFecha> ReservasPorFecha(String empresa)
+    {
+        List<ReservasPorFecha> reservas=  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select tr.Fecha_salida,count(*) as Cantidad_reservas from cr_trips.reserva as r inner join cr_trips.usuario as u on r.Usuario= u.Email inner join cr_trips.Tour_reserva_salida as trs on " +
+            "r.Tour_reserva_salida = trs.Salida and r.Tour_reserva = trs.Tour_reserva inner join cr_trips.Tour_reserva as tr on trs.Tour_reserva=tr.Codigo inner join cr_trips.Tour as t on tr.Tour=t.Codigo where t.Empresa=? group by tr.Fecha_salida order by tr.Fecha_salida ASC");
+            pst.clearParameters();
+            pst.setString(1, empresa);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                reservas.add(DibujarReserva3(rs.getDate("Fecha_salida"),rs.getLong("Cantidad_reservas")));
+
+            }
+            return reservas;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+     //Función para dashboard de reporteria
+    public List<ReservasPorTour> ReservasPorTour(String empresa)
+    {
+        List<ReservasPorTour> reservas=  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select t.Nombre,count(*) as Cantidad_reservas from cr_trips.reserva as r inner join cr_trips.usuario as u on r.Usuario= u.Email inner join cr_trips.Tour_reserva_salida as trs on " +
+            "r.Tour_reserva_salida = trs.Salida and r.Tour_reserva = trs.Tour_reserva inner join cr_trips.Tour_reserva as tr on trs.Tour_reserva=tr.Codigo inner join cr_trips.Tour as t on tr.Tour=t.Codigo where t.Empresa=?  group by t.Nombre order by t.Nombre ASC");
+            pst.clearParameters();
+            pst.setString(1, empresa);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                reservas.add(DibujarReserva4(rs.getString("nombre"),rs.getLong("Cantidad_reservas")));
+
+            }
+            return reservas;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+    public List<GananciaPorTour> GananciasPorTour(String empresa)
+    {
+        List<GananciaPorTour> ganancias=  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select t.Nombre,sum(r.Total) as Ganancia from cr_trips.reserva as r inner join cr_trips.usuario as u on r.Usuario= u.Email inner join cr_trips.Tour_reserva_salida as trs on " +
+            "r.Tour_reserva_salida = trs.Salida and r.Tour_reserva = trs.Tour_reserva inner join cr_trips.Tour_reserva as tr on trs.Tour_reserva=tr.Codigo inner join cr_trips.Tour as t on tr.Tour=t.Codigo where t.Empresa=? group by t.Nombre order by Ganancia ASC");
+            pst.clearParameters();
+            pst.setString(1, empresa);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                ganancias.add(DibujarReserva5(rs.getString("nombre"),rs.getDouble("Ganancia")));
+
+            }
+            return ganancias;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+    public Double GananciaDeTour(int codigo)
+    {
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select sum(r.Total) as Ganancia from cr_trips.reserva where Tour_reserva_salida=? ");
+            pst.clearParameters();
+            pst.setInt(1, codigo);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("Ganancia");
+
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
     public Reserva ObtenerMiReserva(int codigo)
     {
 
@@ -203,5 +295,18 @@ public class DAOReserva extends Conexion{
         r.setTourreserva(tr.ObtenerTourReservaPorCodigo(tour_reserva));
         r.setTour_reserva_salida(trs.ObtenerTourReservaSalida(tour_reserva, tour_reserva_salida));
         return r;
+    }
+    
+    public ReservasPorFecha DibujarReserva3(Date fechasalida,long cantidad)
+    {
+        return new ReservasPorFecha(fechasalida,cantidad);
+    }
+    public ReservasPorTour DibujarReserva4(String nombre,long cantidad)
+    {
+        return new ReservasPorTour(nombre,cantidad);
+    }
+    public GananciaPorTour DibujarReserva5(String nombre,double ganancia)
+    {
+        return new GananciaPorTour(nombre,ganancia);
     }
 }

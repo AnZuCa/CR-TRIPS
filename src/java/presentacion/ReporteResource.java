@@ -47,7 +47,7 @@ public class ReporteResource {
          String nomeRelatorio= "Reservas "+nombre + ".pdf";
         return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
     }
-        @GET
+    @GET
     @Path("/ReporteExcursionesMenosReservas")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getExcursionesMenosReservas(@QueryParam("empresa") String empresa) {
@@ -63,6 +63,33 @@ public class ReporteResource {
         DAOReporte daore = new DAOReporte();
         byte[] bytes=daore.ReporteExcursionesMasReservas(empresa);
          String nomeRelatorio= "ExcursionesMasReservas.pdf";
+        return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
+    }
+    @GET
+    @Path("/ReporteFechasConMasReservas")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getFechasConMasReservas(@QueryParam("empresa") String empresa) {
+        DAOReporte daore = new DAOReporte();
+        byte[] bytes=daore.ReporteFechasMasReservas(empresa);
+         String nomeRelatorio= "FechasConMasReservas.pdf";
+        return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
+    }
+    @GET
+    @Path("/ReporteFechasConMenosReservas")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getFechasConMenosReservas(@QueryParam("empresa") String empresa) {
+        DAOReporte daore = new DAOReporte();
+        byte[] bytes=daore.ReporteFechasMenosReservas(empresa);
+         String nomeRelatorio= "FechasConMenosReservas.pdf";
+        return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
+    }
+    @GET
+    @Path("/ReporteGananciasPorExcursiones")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getGananciasPorExcursiones(@QueryParam("empresa") String empresa) {
+        DAOReporte daore = new DAOReporte();
+        byte[] bytes=daore.ReporteGananciasPorExcursiones(empresa);
+         String nomeRelatorio= "GananciasPorExcursiones.pdf";
         return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
     }
 }
