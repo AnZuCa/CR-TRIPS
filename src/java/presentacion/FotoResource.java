@@ -40,15 +40,7 @@ public class FotoResource {
     public FotoResource() {
     }
     
-    @GET
-    @Path("/getFotoss")
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    public Response getFossstos() {
-        DAOReporte daore = new DAOReporte();
-        byte[] bytes=daore.ReporteUsuarios();
-         String nomeRelatorio= "aaaaa" + ".pdf";
-        return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
-}
+
     
     
 

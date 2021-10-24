@@ -3,17 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/presentacion/TourResource.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/logica/DAO/DAOTourReserva.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/presentacion/CategoriaResource.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/logica/modelo/TourReserva.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/logica/DAO/DAOReporte.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/logica/modelo/TourReservaSalida.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/presentacion/CORSFilter.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/logica/modelo/Usuario.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/logica/modelo/Conexion.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/presentacion/ApplicationConfig.java</file>
-            <file>file:/D:/marvi/Documents/Documentos/UNA/Final%20semestre/Globales/Proyecto/CR-TRIPS/src/java/presentacion/UsuarioResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTour.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/FotoResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOUsuario.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOReporte.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/CategoriaResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTourReserva.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTelefono.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTipoTicket.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Model.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TourResource.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOFoto.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Recomendacion.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/TourReserva.java</file>
         </group>
     </open-files>
 </project-private>

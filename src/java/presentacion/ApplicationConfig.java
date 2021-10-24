@@ -37,6 +37,7 @@ public class ApplicationConfig extends Application {
         resources.add(presentacion.IncluyeResource.class);
         resources.add(presentacion.ListaDeseoResource.class);
         resources.add(presentacion.RecomendacionResource.class);
+        resources.add(presentacion.ReporteResource.class);
         resources.add(presentacion.ReservaResource.class);
         resources.add(presentacion.ReservaTourResource.class);
         resources.add(presentacion.TarjetaResource.class);
