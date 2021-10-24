@@ -30,16 +30,11 @@ public class DAOTicketTour extends Conexion{
             pst = getConexion().prepareStatement("insert into cr_trips.Ticket_tour values(?,?,?) ");
             pst.clearParameters();
             pst.setDouble(1, tickettour.getPrecio());
-<<<<<<< Updated upstream
-            pst.setInt(3, tickettour.getTour().getCodigo());
-            pst.setInt(2, tickettour.getTipoTicket1().getCodigo());
-=======
             pst.setInt(2, tickettour.getTour().getCodigo());
             pst.setInt(3, tickettour.getTipoTicket().getCodigo());
->>>>>>> Stashed changes
+
             if (pst.executeUpdate() != 1) {
                 return false;
-
             }
             return true;
         } catch (SQLException e) {
