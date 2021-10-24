@@ -14,6 +14,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import logica.modelo.Model;
@@ -50,6 +51,15 @@ public class TicketTourResource {
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el ticket tour").build();
+    
+    }
+    
+    @GET
+    @Path("/ObtenerTodos")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getTours(@QueryParam("codigoTour") Integer codigoTour) {
+        String json = new Gson().toJson(Model.instance().ObtenerTicketCodigoTour(codigoTour));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
 }
