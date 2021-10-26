@@ -250,6 +250,7 @@ public class DAOTour extends Conexion{
         DAOComentario c = new DAOComentario();
         DAOIncluye i = new DAOIncluye();
         DAOFoto f = new DAOFoto();
+        DAOPregunta daopregunta = new DAOPregunta();
         Tour tour = new Tour(codigo,nombre,descripcion,foto,provincia,canton);
         tour.setCategoria(new Categoria(categoria,des));
         Usuario user = new Usuario();
@@ -260,6 +261,7 @@ public class DAOTour extends Conexion{
         tour.setRecomendacionList(r.ObtenerRecomendacionesPorTour(codigo));
         tour.setComentarioList(c.ObtenerComentariosPorTour(codigo));
         tour.setFotoList(f.ObtenerFotosPorTour(codigo));
+        tour.setPreguntaList(daopregunta.ObtenerPreguntasPorTour(codigo));
         return tour;
     }
     

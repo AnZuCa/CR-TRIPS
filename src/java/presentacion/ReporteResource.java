@@ -92,4 +92,13 @@ public class ReporteResource {
          String nomeRelatorio= "GananciasPorExcursiones.pdf";
         return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
     }
+    @GET
+    @Path("/ReporteClientesListaDeseo")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getClientesListaDeseo(@QueryParam("empresa") String empresa) {
+        DAOReporte daore = new DAOReporte();
+        byte[] bytes=daore.ReporteCantidadUsuariosListaDeseo(empresa);
+         String nomeRelatorio= "ClientesListaDeseoPorExcursiones.pdf";
+        return Response.ok(bytes).type("application/pdf").header("Content-Disposition", "filename=\"" + nomeRelatorio + "\"").build();
+    }
 }

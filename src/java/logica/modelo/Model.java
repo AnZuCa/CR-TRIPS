@@ -26,6 +26,8 @@ public class Model {
     private DAOTicketTour daotickettour = new DAOTicketTour();
     private DAOTipoTicket daotipoticket = new DAOTipoTicket();
     private DAOReserva daoreserva = new DAOReserva();
+    private DAOPregunta daopregunta = new DAOPregunta();
+    private DAORespuesta daorespuesta = new DAORespuesta();
     private static Model uniqueInstance;
     public static Model instance(){
         if (uniqueInstance == null){
@@ -194,6 +196,10 @@ public class Model {
     {
         return daolistadeseo.ObtenerListaDeseo(user);
     }
+    public List<CantidadUsuariosListaDeseo> ObtenerCantidadUsuariosListaDeseo(String empresa)
+    {
+        return daolistadeseo.ObtenerCantidadUsuariosListaDeseo(empresa);
+    }
     public TipoTicket RegistrarTipoTicket(TipoTicket tipoticket)
     {
         return daotipoticket.RegistrarTipo_ticket(tipoticket);
@@ -201,6 +207,14 @@ public class Model {
     public boolean RegistrarReserva(Reserva reserva)
     {
         return daoreserva.RegistrarReserva(reserva);
+    }
+    public boolean RegistrarPregunta(Pregunta pregunta)
+    {
+        return daopregunta.RegistrarPregunta(pregunta);
+    }
+    public boolean RegistrarRespuesta(Respuesta respuesta)
+    {
+        return daorespuesta.RegistrarRespuesta(respuesta);
     }
     public List<TipoTicket> ObtenerTipoTicket(Usuario user)
     {

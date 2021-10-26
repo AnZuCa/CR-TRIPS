@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import logica.modelo.CantidadUsuariosListaDeseo;
 import logica.modelo.Categoria;
 import logica.modelo.Conexion;
 import logica.modelo.ListaDeseo;
@@ -84,6 +85,28 @@ public class DAOListaDeseo extends Conexion{
         }
         return null;
     }
+      //Función dashboard
+    public List<CantidadUsuariosListaDeseo> ObtenerCantidadUsuariosListaDeseo(String empresa)
+    {
+        List<CantidadUsuariosListaDeseo> cantidadusuarios =  new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select t.Nombre,count(*) as Cantidad_Clientes from cr_trips.lista_deseo as ld inner join cr_trips.tour as t on ld.Tour = t.Codigo where t.Empresa=? and not exists(select * from cr_trips.reserva as r inner join cr_trips.tour_reserva_salida as trs on r.Tour_reserva_salida=trs.Salida and r.Tour_reserva=trs.Tour_reserva inner join cr_trips.tour_reserva as tr on tr.Codigo=trs.Tour_reserva where r.Usuario=ld.Usuario and tr.Tour=t.Codigo) group by t.nombre order by Cantidad_Clientes asc");
+            pst.clearParameters();
+            pst.setString(1, empresa);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                cantidadusuarios.add(DibujarCantidadUsuarios(rs.getString("Nombre"),rs.getLong("Cantidad_Clientes")));
+
+            }
+            return cantidadusuarios;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
      public Tour DibujarTour(Integer codigo, String nombre,String descripcion, String foto,String provincia,String canton,Integer categoria,String des, String email, String nom )
     {   
         Tour tour = new Tour(codigo,nombre,descripcion,foto,provincia,canton);
@@ -108,4 +131,8 @@ public class DAOListaDeseo extends Conexion{
         ld.setUsuario(user);
         return ld;
     }
+      public CantidadUsuariosListaDeseo DibujarCantidadUsuarios(String nombre, Long cantidadclientes)
+      {
+          return new CantidadUsuariosListaDeseo(nombre,cantidadclientes);
+      }
 }

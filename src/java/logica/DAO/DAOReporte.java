@@ -163,6 +163,29 @@ public class DAOReporte extends Conexion {
             }
         return outputStream.toByteArray();   
     }
+    public byte[] ReporteCantidadUsuariosListaDeseo(String empresa)
+    {
+     JRPdfExporter exporter = new JRPdfExporter();
+     JasperReport reporte = null;
+     String path="C:\\Users\\hp\\Desktop\\CR-TRIPS\\src\\java\\Reportes\\ExcursionesListaDeseo.jasper";
+     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try
+        {
+           Map<String,Object> map = new HashMap<String,Object>();
+           map.put("Empresa",empresa);
+           reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+           JasperPrint jasperPrint = JasperFillManager.fillReport(reporte,map,getConexion());
+           exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);   
+         exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+         exporter.exportReport();
+        
+         } catch (Exception e) {
+         e.printStackTrace();
+         System.out.println("Error in generate Report..."+e);
+            } finally {
+            }
+        return outputStream.toByteArray();   
+    }
 
 
 }

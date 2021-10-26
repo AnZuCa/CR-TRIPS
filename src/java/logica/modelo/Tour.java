@@ -103,6 +103,7 @@ public class Tour implements Serializable {
     private List<TourReserva> tourReservaList;
     private Usuario usuario;
     private List<TicketTour> ticketTourList;
+
     
     
     public Tour() {

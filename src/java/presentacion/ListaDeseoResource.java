@@ -53,6 +53,13 @@ public class ListaDeseoResource {
         String json = new Gson().toJson(Model.instance().ObtenerListaDeseo(user));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
+    @GET
+    @Path("/CantidadUsuariosListaDeseo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCantidadUsuariosListaDeseo(@QueryParam("empresa") String empresa) {
+        String json = new Gson().toJson(Model.instance().ObtenerCantidadUsuariosListaDeseo(empresa));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
 
     @POST
     @Path("/Registrar")
