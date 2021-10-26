@@ -38,7 +38,7 @@ public class MailSender {
     }
     public  void sendEmailReserva(Usuario user, Reserva reserva) {
         String asunto="Reserva CR-TRIPS";
-        String mensaje="<h1>Buenas"+user.getNombre()+" "+user.getApellidos()+".</h1><br>"
+        String mensaje="<h1>Buenas "+user.getNombre()+" "+user.getApellidos()+".</h1><br>"
                 +"<p>Le informamos que la reservación con código "+reserva.getCodigo()+" fue exitosa.</p><br><br>"+
                 "Detalles de la reservación:</p><br>Nombre del tour:"+reserva.getTourreserva().getTour().getNombre()+"<br>"
                 +"<p>Punto de salida:"+reserva.getTour_reserva_salida().getSalida().getLugar()+"</p><br>"+
@@ -71,7 +71,7 @@ public class MailSender {
         for(ListaDeseo ls: users)
         {
                     String asunto="";
-        String mensaje="<h1>Buenas"+ls.getUsuario().getNombre()+" "+ls.getUsuario().getApellidos()+".</h1><br>"
+        String mensaje="<h1>Buenas "+ls.getUsuario().getNombre()+" "+ls.getUsuario().getApellidos()+".</h1><br>"
                 +"<p>Le informamos que tenemos una nueva excursión a "+ls.getTour().getNombre()+" el día"+salida.toString()+"</p><br><br>"+
                 "No deje ir esta oportunidad, esperamos verlos en este nuevo viaje por los rincones de Costa Rica!";
         
