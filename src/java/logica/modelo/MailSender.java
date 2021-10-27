@@ -24,8 +24,8 @@ import javax.mail.internet.MimeMessage;
  * @author hp
  */
 public class MailSender {
-    private String correo ="";
-    private String password ="";
+    private String correo ="CRTRIPSGLOBALES@gmail.com";
+    private String password ="Lala1234";
     
     public Session GetSession()
     {
