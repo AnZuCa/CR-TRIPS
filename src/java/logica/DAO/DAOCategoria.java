@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import logica.modelo.Conexion;
 import logica.modelo.Categoria;
+import logica.modelo.Incluye;
+import logica.modelo.Usuario;
 
 /**
  *
@@ -78,6 +80,7 @@ public class DAOCategoria extends Conexion{
         }
         return false;
     }
+       
     public Categoria DibujarCategoria(Integer codigo, String descripcion)
     {   
         return new Categoria(codigo,descripcion);

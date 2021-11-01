@@ -16,10 +16,12 @@ import logica.modelo.Categoria;
 import logica.modelo.Model;
 import com.google.gson.Gson;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import logica.modelo.Incluye;
 
 /**
  * REST Web Service
@@ -48,6 +50,21 @@ public class CategoriaResource {
     public Response getCategoria(@QueryParam("codigo") Integer codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerCategoriaPorId(codigo));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    
+    }
+    @POST
+    @Path("/Registrar")
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response RegistrarCategoria(Categoria c) {
+        //Lleva usuario dentro del objeto
+        boolean flag = Model.instance().RegistrarCategoria(c);
+        if (flag == true)
+        {
+            String json = new Gson().toJson(Model.instance().ObtenerCategorias());
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar la categoria").build();
     
     }
     @GET

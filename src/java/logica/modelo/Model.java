@@ -176,6 +176,7 @@ public class Model {
     {
         return daocomentario.RegistrarComentarioTour(comentario);
     }
+
     public List<Comentario> ObtenerComentariosPorTour(int tour)
     {
         return daocomentario.ObtenerComentariosPorTour(tour);
