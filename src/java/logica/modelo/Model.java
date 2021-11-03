@@ -28,6 +28,7 @@ public class Model {
     private DAOReserva daoreserva = new DAOReserva();
     private DAOPregunta daopregunta = new DAOPregunta();
     private DAORespuesta daorespuesta = new DAORespuesta();
+    private DAOSalida daosalida = new DAOSalida();
     private static Model uniqueInstance;
     public static Model instance(){
         if (uniqueInstance == null){
@@ -139,6 +140,15 @@ public class Model {
     {
         return daotourreserva.RegistrarTourReserva(tourreserva);
 
+    }
+      public boolean RegistrarSalida(Salida salida)
+    {
+        return daosalida.RegistrarSalida(salida);
+
+    }
+       public List<Salida> ObtenerSalidas()
+    {
+        return daosalida.ObtenerSalidas();
     }
     public boolean RegistrarTourReservaSalida(TourReservaSalida trs)
     {
