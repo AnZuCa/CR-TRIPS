@@ -8,6 +8,7 @@ package logica.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class DAOSalida extends Conexion{
             pst = getConexion().prepareStatement("insert into cr_trips.Salida(Lugar,Fecha_hora) values(?,?) ");
             pst.clearParameters();
             pst.setString(1, salida.getLugar());
-            pst.setDate(2, conver.ConvertidorFechaHora(salida.getFechahora()));
+            pst.setTimestamp(2, conver.ConvertidorFechaHora(salida.getFechahora()));
             if (pst.executeUpdate() != 1) {
                 return false;
 

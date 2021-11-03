@@ -28,13 +28,13 @@ public class ConvertidorFechaSQL {
     
     
     }
-    public java.sql.Date ConvertidorFechaHora(Date fecha)
+    public java.sql.Timestamp ConvertidorFechaHora(Date fecha)
     {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String formattedDate = simpleDateFormat.format(fecha);
-
-        java.sql.Date date1 = java.sql.Date.valueOf(formattedDate);
+ 
+        java.sql.Timestamp date1 = java.sql.Timestamp.valueOf(formattedDate);
         
         return date1;
     
