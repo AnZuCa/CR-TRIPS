@@ -18,7 +18,7 @@ public class ConvertidorFechaSQL {
     }
     public java.sql.Date Convertidor(Date fecha)
     {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         String formattedDate = simpleDateFormat.format(fecha);
 
