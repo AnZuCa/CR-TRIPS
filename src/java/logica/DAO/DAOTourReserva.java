@@ -25,7 +25,7 @@ import logica.modelo.TourReservaSalida;
  * @author hp
  */
 public class DAOTourReserva extends Conexion{
-    public boolean RegistrarTourReserva(TourReserva tourreserva)
+    public TourReserva RegistrarTourReserva(TourReserva tourreserva)
     {
         MailSender mailsender = new MailSender();
         ConvertidorFechaSQL convert = new ConvertidorFechaSQL();
@@ -40,16 +40,17 @@ public class DAOTourReserva extends Conexion{
             pst.setDate(3, convert.Convertidor(tourreserva.getFechallegada()));
             pst.setInt(4, tourreserva.getCantidadtickets());
             if (pst.executeUpdate() != 1) {
-                return false;
+                return null;
 
             }
             DAOListaDeseo ls = new DAOListaDeseo();
             mailsender.sendEmailUsuariosListaDeseo(ls.ObtenerListaDeseoPorTour(tourreserva.getTour().getCodigo()), tourreserva.getFechasalida());
-            return true;
+            TourReserva tr = ObtenerUltimoTourReserva();
+            return tr;
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
-        return false;
+        return null;
     }
     public int ObtenerUltimoTourReservaRegistrado(int codigo)
     {
@@ -86,6 +87,27 @@ public class DAOTourReserva extends Conexion{
 
             }
             return tourreserva;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+    
+        public TourReserva ObtenerUltimoTourReserva()
+    {
+   
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select * from cr_trips.tour_reserva order by 1 desc limit 1");
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return DibujarTourReserva(rs.getInt("Codigo"), rs.getInt("Tour"), rs.getDate("Fecha_salida"),rs.getDate("Fecha_llegada"),rs.getInt("Cantidad_tickets"));
+
+            }
+
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }

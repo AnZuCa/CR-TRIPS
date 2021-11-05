@@ -136,7 +136,7 @@ public class Model {
         int codigo = daotour.ObtenerUltimoTourRegistrado(r.getTour().getEmpresa().getEmail());
         return daorecomendacion.RegistrarRecomendacionTour(r.getRecomendacion().getCodigo(), codigo);
     }
-     public boolean RegistrarReservaTour(TourReserva tourreserva)
+     public TourReserva RegistrarReservaTour(TourReserva tourreserva)
     {
         return daotourreserva.RegistrarTourReserva(tourreserva);
 

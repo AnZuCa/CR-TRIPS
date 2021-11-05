@@ -54,7 +54,7 @@ public class DAOSalida extends Conexion{
             pst.clearParameters();
             rs = pst.executeQuery();
             while (rs.next()) {
-                salidas.add(DibujarSalida(rs.getInt("Codigo"), rs.getString("Lugar"), rs.getDate("Fecha_hora")));
+                salidas.add(DibujarSalida(rs.getInt("Codigo"), rs.getString("Lugar"), rs.getTimestamp("Fecha_hora")));
 
             }
             return salidas;

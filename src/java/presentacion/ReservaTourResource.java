@@ -46,10 +46,10 @@ public class ReservaTourResource {
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarReservaTour(TourReserva rt) {
-        boolean flag = Model.instance().RegistrarReservaTour(rt) ;
-        if (flag == true)
+        TourReserva flag = Model.instance().RegistrarReservaTour(rt) ;
+        if (flag != null)
         {
-            String json = new Gson().toJson("Registro correcto");
+            String json = new Gson().toJson(flag);
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar").build();
