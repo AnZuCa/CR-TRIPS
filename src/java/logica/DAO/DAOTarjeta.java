@@ -47,7 +47,7 @@ public class DAOTarjeta extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("insert into cr_trips.Tarjeta(Numero, MMYYY, CVC, Usuario) values(?,?,?,?,?) ");
+            pst = getConexion().prepareStatement("insert into cr_trips.Tarjeta(Numero, MMYYY, CVC, Usuario) values(?,?,?,?) ");
             pst.clearParameters();
             pst.setString(1,tarjeta.getNumero());
             pst.setString(2, tarjeta.getMmyyy());
