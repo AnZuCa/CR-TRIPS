@@ -31,7 +31,7 @@ public class DAOTarjeta extends Conexion{
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
             while (rs.next()) {
-                tarjetas.add(DibujarTarjeta(rs.getInt("Codigo"), rs.getString("Numero"),rs.getString("MMYYY"),rs.getInt("CVC")));
+                tarjetas.add(DibujarTarjeta(rs.getInt("Codigo"), rs.getString("Numero"),rs.getString("MMYYY"),rs.getInt("CVC"),rs.getString("Titular")));
 
             }
             return tarjetas;
@@ -47,12 +47,13 @@ public class DAOTarjeta extends Conexion{
         ResultSet rs = null;
         try {
 
-            pst = getConexion().prepareStatement("insert into cr_trips.Tarjeta(Numero, MMYYY, CVC, Usuario) values(?,?,?,?) ");
+            pst = getConexion().prepareStatement("insert into cr_trips.Tarjeta(Numero, MMYYY, CVC, Usuario,Titular) values(?,?,?,?,?) ");
             pst.clearParameters();
             pst.setString(1,tarjeta.getNumero());
             pst.setString(2, tarjeta.getMmyyy());
             pst.setInt(3, tarjeta.getCvc());
             pst.setString(4, tarjeta.getUsuario().getEmail());
+            pst.setString(5, tarjeta.getTitular());
             if (pst.executeUpdate() != 1) {
                 return false;
 
@@ -63,8 +64,8 @@ public class DAOTarjeta extends Conexion{
         }
         return false;
     }
-    public Tarjeta DibujarTarjeta(Integer codigo, String numero, String mmyy, Integer cvc)
+    public Tarjeta DibujarTarjeta(Integer codigo, String numero, String mmyy, Integer cvc, String titular)
     {   
-        return new Tarjeta(codigo,numero,mmyy,cvc);
+        return new Tarjeta(codigo,numero,mmyy,cvc, titular);
     }
 }

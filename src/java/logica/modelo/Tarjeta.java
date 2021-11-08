@@ -59,7 +59,8 @@ public class Tarjeta implements Serializable {
     @JoinColumn(name = "Usuario", referencedColumnName = "Email")
     @ManyToOne(optional = false)
     private Usuario usuario;
-
+    private String titular;
+    
     public Tarjeta() {
     }
 
@@ -67,13 +68,23 @@ public class Tarjeta implements Serializable {
         this.codigo = codigo;
     }
 
-    public Tarjeta(Integer codigo, String numero, String mmyyy, int cvc) {
+    public Tarjeta(Integer codigo, String numero, String mmyyy, int cvc,String titular) {
         this.codigo = codigo;
         this.numero = numero;
         this.mmyyy = mmyyy;
         this.cvc = cvc;
+        this.titular=titular;
     }
 
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    
     public Integer getCodigo() {
         return codigo;
     }
