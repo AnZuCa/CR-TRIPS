@@ -126,6 +126,11 @@ public class Model {
         //t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));
         return daotickettour.RegistrarTicketTour(t);
     }
+    public boolean EliminarTourListaDeseo(ListaDeseo l)
+    {
+        //t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));
+        return daolistadeseo.EliminarTourDeseo(l);
+    }
     public boolean RegistrarIncluyeTour(IncluyeTour i)
     {
         int codigo = daotour.ObtenerUltimoTourRegistrado(i.getTour().getEmpresa().getEmail());

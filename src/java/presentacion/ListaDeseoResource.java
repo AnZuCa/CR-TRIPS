@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -74,6 +75,20 @@ public class ListaDeseoResource {
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el tour en lista de deseo").build();
+    
+    }
+    @DELETE
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response EliminarTourDeseo(ListaDeseo tourdeseo) {
+        //Llleva usuario el objeto
+        boolean flag = Model.instance().EliminarTourListaDeseo(tourdeseo) ;
+        if (flag == true)
+        {
+            String json = new Gson().toJson("Se eliminó corrrectamente el tour en lista de deseo");
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al eliminar el tour en lista de deseo").build();
     
     }
 }
