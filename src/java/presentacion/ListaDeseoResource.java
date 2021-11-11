@@ -31,6 +31,7 @@ import logica.modelo.Usuario;
  */
 @Path("ListaDeseo")
 public class ListaDeseoResource {
+
     @Context
     private HttpServletRequest request;
     @Context
@@ -43,7 +44,9 @@ public class ListaDeseoResource {
     }
 
     /**
-     * Retrieves representation of an instance of presentacion.ListaDeseoResource
+     * Retrieves representation of an instance of
+     * presentacion.ListaDeseoResource
+     *
      * @return an instance of java.lang.String
      */
     @GET
@@ -54,6 +57,7 @@ public class ListaDeseoResource {
         String json = new Gson().toJson(Model.instance().ObtenerListaDeseo(user));
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
+
     @GET
     @Path("/CantidadUsuariosListaDeseo")
     @Produces(MediaType.APPLICATION_JSON)
@@ -68,27 +72,27 @@ public class ListaDeseoResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarTourDeseo(ListaDeseo tourdeseo) {
         //Llleva usuario el objeto
-        boolean flag = Model.instance().RegistrarTourListaDeseo(tourdeseo) ;
-        if (flag == true)
-        {
+        boolean flag = Model.instance().RegistrarTourListaDeseo(tourdeseo);
+        if (flag == true) {
             String json = new Gson().toJson("Registro correcto de tour en lista de deseo");
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el tour en lista de deseo").build();
-    
+
     }
-    @DELETE
+
+    @POST
+    @Path("/Delete")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response EliminarTourDeseo(ListaDeseo tourdeseo) {
         //Llleva usuario el objeto
-        boolean flag = Model.instance().EliminarTourListaDeseo(tourdeseo) ;
-        if (flag == true)
-        {
+        boolean flag = Model.instance().EliminarTourListaDeseo(tourdeseo);
+        if (flag == true) {
             String json = new Gson().toJson("Se eliminó corrrectamente el tour en lista de deseo");
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al eliminar el tour en lista de deseo").build();
-    
+
     }
 }
