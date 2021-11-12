@@ -76,7 +76,7 @@ public class DAOListaDeseo extends Conexion{
             pst.setString(1, user.getEmail());
             rs = pst.executeQuery();
             while (rs.next()) {
-                tours.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("des"),rs.getString("email"),rs.getString("nom")));
+                tours.add(DibujarTour(rs.getInt("Codigo"), rs.getString("Nombre"),rs.getString("Descripcion"),rs.getString("foto"),rs.getString("provincia"),rs.getString("canton"),rs.getInt("categoria"),rs.getString("descripcion"),rs.getString("email"),rs.getString("nom")));
 
             }
             return tours;
@@ -136,6 +136,7 @@ public class DAOListaDeseo extends Conexion{
         user.setEmail(email);
         user.setNombre(nom);
         tour.setUsuario(user);
+        System.out.println(tour.toString());
         return tour;
     }
       public ListaDeseo DibujarUsuariosListaDeseo(String email, String nom,String apellidos,String tour )

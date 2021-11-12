@@ -50,6 +50,7 @@ public class ListaDeseoResource {
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("/getListaDeseos")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getListaDeseo(@QueryParam("correo") String correo) {
         Usuario user = new Usuario();
