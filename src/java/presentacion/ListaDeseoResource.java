@@ -96,4 +96,16 @@ public class ListaDeseoResource {
         return Response.status(Response.Status.SEE_OTHER).entity("Error al eliminar el tour en lista de deseo").build();
 
     }
+    
+    @GET
+    @Path("/DeleteAllUser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response EliminarTodoListaDeseo(@QueryParam("correo") String correo) {
+         boolean flag = Model.instance().EliminaTodoListaDeseos(correo);
+        if (flag == true) {
+            String json = new Gson().toJson("Se eliminó corrrectamente toda la lista de deseos del usuario");
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
+        return Response.status(Response.Status.SEE_OTHER).entity("Error al eliminar la lista de deseos").build();
+    }
 }

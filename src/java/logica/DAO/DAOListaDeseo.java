@@ -64,6 +64,26 @@ public class DAOListaDeseo extends Conexion{
         }
         return false;
     }
+    
+     public boolean eliminarTodoListaDeseo(String correo)
+    {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("delete from cr_trips.Lista_deseo where Usuario=?");
+            pst.clearParameters();
+            pst.setString(1, correo);
+            if (pst.executeUpdate() != 1) {
+                return false;
+
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return false;
+    }
      public List<Tour> ObtenerListaDeseo(Usuario user)
     {
         List<Tour> tours =  new ArrayList<>();
