@@ -55,10 +55,11 @@ public class ComentarioResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarComentario(Comentario comentario) {
         //Llevan usuario dentro del objeto
+      
         boolean flag = Model.instance().RegistrarComentario(comentario);
         if (flag == true)
         {
-            String json = new Gson().toJson(Model.instance().ObtenerComentariosPorTour(comentario.getTour().getCodigo()));
+            String json = new Gson().toJson("Registro correcto eL Comentario");
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el comentario").build();
