@@ -43,6 +43,7 @@ public class ComentarioResource {
     }
 
     @GET
+    @Path("/getAllComments")
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getCometarioPorTour(@QueryParam("codigo") int codigo) {
         String json = new Gson().toJson(Model.instance().ObtenerComentariosPorTour(codigo));
