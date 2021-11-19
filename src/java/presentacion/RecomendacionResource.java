@@ -55,6 +55,16 @@ public class RecomendacionResource {
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
+    
+     @GET
+    @Path("/getRecomendaciones")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getRecomendacionesPorTour(@QueryParam("codigo") int codigo) {
+        String json = new Gson().toJson(Model.instance().ObtenerRecomendacionPorTour(codigo));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    
+    
     @POST
     @Path("/Registrar")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)

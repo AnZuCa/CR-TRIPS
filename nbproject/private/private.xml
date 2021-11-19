@@ -3,27 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOSalida.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAORespuesta.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/RespuestaResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOReporte.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Salida.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/CategoriaResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTourReserva.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/IncluyeResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/SalidaResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Tarjeta.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOIncluye.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTourReservaSalida.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOTarjeta.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Model.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/ConvertidorFechaSQL.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOCategoria.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOReserva.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TourReservaSalidaResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaTourResource.java</file>
-            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Reserva.java</file>
+            <file>file:/C:/Users/Carlo/OneDrive/Documentos/GitHub/CR-TRIPS/src/java/presentacion/IncluyeResource.java</file>
+            <file>file:/C:/Users/Carlo/OneDrive/Documentos/GitHub/CR-TRIPS/src/java/logica/modelo/Model.java</file>
+            <file>file:/C:/Users/Carlo/OneDrive/Documentos/GitHub/CR-TRIPS/src/java/presentacion/RecomendacionResource.java</file>
+            <file>file:/C:/Users/Carlo/OneDrive/Documentos/GitHub/CR-TRIPS/src/java/logica/DAO/DAORecomendacion.java</file>
+            <file>file:/C:/Users/Carlo/OneDrive/Documentos/GitHub/CR-TRIPS/src/java/logica/DAO/DAOIncluye.java</file>
         </group>
     </open-files>
 </project-private>

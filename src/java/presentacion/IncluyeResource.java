@@ -48,6 +48,14 @@ public class IncluyeResource {
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
+     @GET
+    @Path("/getIncluye")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getIncluyePorTour(@QueryParam("codigo") int codigo) {
+        String json = new Gson().toJson(Model.instance().ObtenerIncluyesPorTour(codigo));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    
     @POST
     @Path("/Registrar")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)

@@ -210,6 +210,16 @@ public class Model {
     {
         return daofoto.ObtenerFotosPorTour(tour);
     }
+    public List<Recomendacion> ObtenerRecomendacionPorTour(int tour)
+    {
+        return daorecomendacion.ObtenerRecomendacionesPorTour(tour);
+    }
+    
+    public List<Incluye> ObtenerIncluyePorTour(int tour)
+    {
+        return daoincluye.ObtenerIncluyesPorTour(tour);
+    }
+    
     public boolean RegistrarTourListaDeseo(ListaDeseo listadeseo)
     {
         return daolistadeseo.RegistrarTourDeseo(listadeseo);
