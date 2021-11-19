@@ -49,7 +49,7 @@ public class Model {
     {
         return daorecomendacion.ObtenerRecomendacionesPorTour(codigotour);
     }
-    public boolean RegistrarRecomendacion(Recomendacion recomendacion, Usuario user)
+    public Recomendacion RegistrarRecomendacion(Recomendacion recomendacion, Usuario user)
     {
         return daorecomendacion.RegistrarRecomendacion(recomendacion, user);
     }
