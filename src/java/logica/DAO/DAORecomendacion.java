@@ -61,7 +61,27 @@ public class DAORecomendacion extends Conexion {
         }
         return null;
     }
-    public boolean RegistrarRecomendacion(Recomendacion recomendacion,Usuario usuario)
+      
+    public Recomendacion ObtenerUltimaRecomendacion()
+    {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+
+            pst = getConexion().prepareStatement("select * from cr_trips.Recomendacion order by 1 desc limit 1 ");
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                return DibujarRecomendacion(rs.getInt("Codigo"),rs.getString("Descripcion"));
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        return null;
+    }
+      
+    public Recomendacion RegistrarRecomendacion(Recomendacion recomendacion,Usuario usuario)
     {
         
         PreparedStatement pst = null;
@@ -73,14 +93,14 @@ public class DAORecomendacion extends Conexion {
             pst.setString(1, recomendacion.getDescripcion());
             pst.setString(2, usuario.getEmail());
             if (pst.executeUpdate() != 1) {
-                return false;
+                return null;
 
             }
-            return true;
+            return ObtenerUltimaRecomendacion();
         } catch (SQLException e) {
             System.err.println("Error" + e);
         }
-        return false;
+        return null;
     }
     public boolean RegistrarRecomendacionTour(int recomendacion,int tour)
     {

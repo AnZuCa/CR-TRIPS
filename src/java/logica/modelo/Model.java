@@ -49,7 +49,7 @@ public class Model {
     {
         return daorecomendacion.ObtenerRecomendacionesPorTour(codigotour);
     }
-    public boolean RegistrarRecomendacion(Recomendacion recomendacion, Usuario user)
+    public Recomendacion RegistrarRecomendacion(Recomendacion recomendacion, Usuario user)
     {
         return daorecomendacion.RegistrarRecomendacion(recomendacion, user);
     }
@@ -131,6 +131,12 @@ public class Model {
         //t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));
         return daolistadeseo.EliminarTourDeseo(l);
     }
+    
+     public boolean EliminaTodoListaDeseos(String correo)
+    {
+        //t.getTour().setCodigo(daotour.ObtenerUltimoTourRegistrado(t.getTour().getEmpresa().getEmail()));
+        return daolistadeseo.eliminarTodoListaDeseo(correo);
+    }
     public boolean RegistrarIncluyeTour(IncluyeTour i)
     {
         int codigo = daotour.ObtenerUltimoTourRegistrado(i.getTour().getEmpresa().getEmail());
@@ -154,6 +160,10 @@ public class Model {
        public List<Salida> ObtenerSalidas()
     {
         return daosalida.ObtenerSalidas();
+    }
+    public List<TourReservaSalida> ObtenerSalidasTourReserva(int tour_reserva)
+    {
+        return daotourreservasalida.ObtenerTourReservaSalidas(tour_reserva);
     }
     public boolean RegistrarTourReservaSalida(TourReservaSalida trs)
     {
@@ -204,6 +214,16 @@ public class Model {
     {
         return daofoto.ObtenerFotosPorTour(tour);
     }
+    public List<Recomendacion> ObtenerRecomendacionPorTour(int tour)
+    {
+        return daorecomendacion.ObtenerRecomendacionesPorTour(tour);
+    }
+    
+    public List<Incluye> ObtenerIncluyePorTour(int tour)
+    {
+        return daoincluye.ObtenerIncluyesPorTour(tour);
+    }
+    
     public boolean RegistrarTourListaDeseo(ListaDeseo listadeseo)
     {
         return daolistadeseo.RegistrarTourDeseo(listadeseo);

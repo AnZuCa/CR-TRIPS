@@ -14,6 +14,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import logica.modelo.Model;
@@ -53,6 +54,13 @@ public class TourReservaSalidaResource {
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar el Tour Reserva Salida").build();
+    
+    }
+    @GET
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getListaSalidas(@QueryParam("tour_reserva") int tour_reserva) {
+        String json = new Gson().toJson(Model.instance().ObtenerSalidasTourReserva(tour_reserva));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
 }

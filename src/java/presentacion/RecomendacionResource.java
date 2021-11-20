@@ -55,16 +55,26 @@ public class RecomendacionResource {
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
     
     }
+    
+     @GET
+    @Path("/getRecomendaciones")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getRecomendacionesPorTour(@QueryParam("codigo") int codigo) {
+        String json = new Gson().toJson(Model.instance().ObtenerRecomendacionPorTour(codigo));
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    
+    
     @POST
     @Path("/Registrar")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response RegistrarRecomendacion(Recomendacion recomendacion) {
         //Llleva usuario el objeto
-        boolean flag = Model.instance().RegistrarRecomendacion(recomendacion, recomendacion.getEmpresa());
-        if (flag == true)
+        Recomendacion flag = Model.instance().RegistrarRecomendacion(recomendacion, recomendacion.getEmpresa());
+        if (flag != null)
         {
-            String json = new Gson().toJson(Model.instance().ObtenerRecomendacionesPorEmpresa(recomendacion.getEmpresa().getEmail()));
+            String json = new Gson().toJson(flag);
             return Response.ok(json, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.SEE_OTHER).entity("Error al registrar la recomendación").build();

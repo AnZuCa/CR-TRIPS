@@ -48,8 +48,8 @@ public class Comentario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
-    @Column(name = "Descripci\u00f3n")
-    private String descripción;
+    @Column(name = "Descripcion")
+    private String descripcion;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Estrellas")
@@ -73,9 +73,9 @@ public class Comentario implements Serializable {
         this.codigo = codigo;
     }
 
-    public Comentario(Integer codigo, String descripción, int estrellas, Date fecha) {
+    public Comentario(Integer codigo, String descripcion, int estrellas, Date fecha) {
         this.codigo = codigo;
-        this.descripción = descripción;
+        this.descripcion = descripcion;
         this.estrellas = estrellas;
         this.fecha = fecha;
     }
@@ -88,12 +88,12 @@ public class Comentario implements Serializable {
         this.codigo = codigo;
     }
 
-    public String getDescripción() {
-        return descripción;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getEstrellas() {
