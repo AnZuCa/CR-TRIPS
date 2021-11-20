@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOSalida.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAORespuesta.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOListaDeseo.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/ListaDeseo.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/RespuestaResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/DAO/DAOReporte.java</file>
@@ -24,6 +26,7 @@
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/TourReservaSalidaResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ReservaTourResource.java</file>
             <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/logica/modelo/Reserva.java</file>
+            <file>file:/C:/Users/hp/Desktop/CR-TRIPS/src/java/presentacion/ListaDeseoResource.java</file>
         </group>
     </open-files>
 </project-private>
