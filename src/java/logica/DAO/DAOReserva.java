@@ -29,7 +29,7 @@ import logica.modelo.Usuario;
 public class DAOReserva extends Conexion{
     public boolean RegistrarReserva(Reserva reserva)
     {
-        String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
@@ -51,7 +51,7 @@ public class DAOReserva extends Conexion{
                 }
                 ActualizarCantidadAsientosTour(reserva.getTourreserva().getCodigo(),asientosdisponibles-reserva.getCantidadtickets());
                 MailSender ms = new MailSender();
-                ms.sendEmailReserva(reserva.getUsuario(), ObtenerUltimaReserva(reserva.getUsuario().getEmail()));
+                //ms.sendEmailReserva(reserva.getUsuario(), ObtenerUltimaReserva(reserva.getUsuario().getEmail()));
                 return true;
             }
             
